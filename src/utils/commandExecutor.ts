@@ -1,0 +1,491 @@
+import { OutputLine } from '../types/terminal';
+import { ASCII_BANNER, TAGLINE, COMMAND_DESCRIPTIONS } from './constants';
+import { isValidCommand } from './commands';
+
+export const executeTerminalCommand = (command: string): OutputLine | OutputLine[] => {
+  const [baseCommand, ...args] = command.toLowerCase().split(' ');
+  const fullArgs = args.join(' ');
+
+  const commandId = Date.now();
+
+  switch (baseCommand) {
+    case 'banner':
+      return [
+        {
+          id: commandId,
+          content: `<pre class="text-terminal-green font-bold text-xs md:text-sm glitch" data-text="${ASCII_BANNER}">${ASCII_BANNER}</pre>`,
+          type: 'success',
+          animate: false,
+          className: 'mb-4'
+        },
+        {
+          id: commandId + 1,
+          content: `<div class="text-center text-terminal-text text-lg font-semibold mb-6">${TAGLINE}</div>`,
+          type: 'normal',
+          animate: false,
+          speed: 15 // Faster speed
+        },
+        {
+          id: commandId + 2,
+          content: `<div class="flex gap-4 justify-center mt-4">
+            <button onclick="window.open('https://youtube.com', '_blank')" class="px-4 py-2 bg-terminal-green/20 text-terminal-green border border-terminal-green rounded hover:bg-terminal-green hover:text-terminal-bg transition-all duration-300 cursor-pointer">
+              $ ./see-my-work
+            </button>
+            <button onclick="window.open('https://youtube.com', '_blank')" class="px-4 py-2 bg-terminal-blue/20 text-terminal-blue border border-terminal-blue rounded hover:bg-terminal-blue hover:text-terminal-bg transition-all duration-300 cursor-pointer">
+              $ ./contact-me
+            </button>
+          </div>`,
+          type: 'normal',
+          animate: false,
+          className: 'mb-6'
+        }
+      ];
+
+    case 'about':
+      return [
+        {
+          id: commandId,
+          content: '<span class="text-terminal-green">Gathering facts… Done. Printing biography.</span>',
+          type: 'success',
+          animate: true,
+          speed: 20 // Faster speed
+        },
+        {
+          id: commandId + 1,
+          content: `<div class="mt-4 space-y-4">
+            <p class="text-terminal-text">
+              Hey there! I'm a passionate full-stack developer who loves crafting digital experiences 
+              that make a difference. When I'm not coding, you'll find me exploring the latest in AI, 
+              contributing to open source, or perfecting my coffee brewing technique ☕
+            </p>
+            <div class="mt-4">
+              <h3 class="text-terminal-green font-semibold mb-2">$ interests --list</h3>
+              <ul class="space-y-1 pl-4">
+                <li class="text-terminal-text">🚀 Building scalable web applications</li>
+                <li class="text-terminal-text">🤖 Machine Learning & AI development</li>
+                <li class="text-terminal-text">🏏 Cricket enthusiast (both playing and watching)</li>
+                <li class="text-terminal-text">🍳 Experimenting with new recipes</li>
+                <li class="text-terminal-text">🎤 Karaoke nights (yes, I sing!)</li>
+                <li class="text-terminal-text">📚 Always learning something new</li>
+              </ul>
+            </div>
+          </div>`,
+          type: 'normal',
+          animate: true,
+          speed: 15 // Faster speed
+        }
+      ];
+
+    case 'services':
+      return [
+        {
+          id: commandId,
+          content: '<span class="text-terminal-green">Loading service catalog...</span>',
+          type: 'success',
+          animate: true,
+          speed: 25 // Faster speed
+        },
+        {
+          id: commandId + 1,
+          content: `<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="border border-terminal-green/30 rounded-lg p-4 hover:border-terminal-green hover:shadow-lg hover:shadow-terminal-green/20 transition-all duration-300">
+              <h3 class="text-terminal-green font-semibold text-lg mb-2">Web Development</h3>
+              <ul class="space-y-1 text-terminal-text">
+                <li>• Full-stack applications</li>
+                <li>• React/Next.js frontends</li>
+                <li>• Node.js/Python backends</li>
+                <li>• Database design & optimization</li>
+                <li>• API development & integration</li>
+              </ul>
+            </div>
+            <div class="border border-terminal-blue/30 rounded-lg p-4 hover:border-terminal-blue hover:shadow-lg hover:shadow-terminal-blue/20 transition-all duration-300">
+              <h3 class="text-terminal-blue font-semibold text-lg mb-2">AI & Machine Learning</h3>
+              <ul class="space-y-1 text-terminal-text">
+                <li>• Custom ML model development</li>
+                <li>• Natural Language Processing</li>
+                <li>• Computer Vision solutions</li>
+                <li>• AI integration & deployment</li>
+                <li>• Data analysis & visualization</li>
+              </ul>
+            </div>
+            <div class="border border-yellow-500/30 rounded-lg p-4 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300">
+              <h3 class="text-yellow-500 font-semibold text-lg mb-2">Cloud & DevOps</h3>
+              <ul class="space-y-1 text-terminal-text">
+                <li>• AWS/Azure cloud architecture</li>
+                <li>• CI/CD pipeline setup</li>
+                <li>• Docker containerization</li>
+                <li>• Infrastructure as Code</li>
+                <li>• Performance optimization</li>
+              </ul>
+            </div>
+            <div class="border border-purple-500/30 rounded-lg p-4 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
+              <h3 class="text-purple-500 font-semibold text-lg mb-2">Consulting</h3>
+              <ul class="space-y-1 text-terminal-text">
+                <li>• Technical architecture review</li>
+                <li>• Code audits & optimization</li>
+                <li>• Team mentoring & training</li>
+                <li>• Technology stack selection</li>
+                <li>• Project planning & estimation</li>
+              </ul>
+            </div>
+          </div>`,
+          type: 'normal',
+          animate: false,
+          className: 'mb-4'
+        }
+      ];
+
+    case 'projects':
+      return [
+        {
+          id: commandId,
+          content: '<span class="text-terminal-green">$ git branch --list-projects</span>',
+          type: 'success',
+          animate: true,
+          speed: 20 // Faster speed
+        },
+        {
+          id: commandId + 1,
+          content: `<div class="mt-4 space-y-6">
+            <div class="border border-terminal-green/30 rounded-lg p-4 hover:border-terminal-green hover:shadow-lg hover:shadow-terminal-green/20 transition-all duration-300">
+              <div class="flex flex-wrap items-center justify-between mb-3">
+                <h3 class="text-terminal-green font-semibold text-lg">AI Voice Assistant Platform</h3>
+                <span class="text-xs bg-terminal-green/20 text-terminal-green px-2 py-1 rounded">VoiceTech</span>
+              </div>
+              <p class="text-terminal-text mb-3">
+                Built a comprehensive voice assistant platform with real-time speech recognition, 
+                natural language understanding, and multi-language support. Handles 10k+ daily interactions.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-3">
+                <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Python</span>
+                <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">FastAPI</span>
+                <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">React</span>
+                <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">TensorFlow</span>
+                <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">WebRTC</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
+                <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Live Demo →</a>
+              </div>
+            </div>
+
+            <div class="border border-terminal-blue/30 rounded-lg p-4 hover:border-terminal-blue hover:shadow-lg hover:shadow-terminal-blue/20 transition-all duration-300">
+              <div class="flex flex-wrap items-center justify-between mb-3">
+                <h3 class="text-terminal-blue font-semibold text-lg">HealthTech Analytics Dashboard</h3>
+                <span class="text-xs bg-terminal-blue/20 text-terminal-blue px-2 py-1 rounded">HealthTech</span>
+              </div>
+              <p class="text-terminal-text mb-3">
+                Developed a real-time healthcare analytics platform that processes patient data, 
+                generates insights, and provides predictive analytics for better patient outcomes.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-3">
+                <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">TypeScript</span>
+                <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Next.js</span>
+                <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">D3.js</span>
+                <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">PostgreSQL</span>
+                <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">Docker</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
+                <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Case Study →</a>
+              </div>
+            </div>
+
+            <div class="border border-yellow-500/30 rounded-lg p-4 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300">
+              <div class="flex flex-wrap items-center justify-between mb-3">
+                <h3 class="text-yellow-500 font-semibold text-lg">Smart Trading Algorithm</h3>
+                <span class="text-xs bg-yellow-500/20 text-yellow-500 px-2 py-1 rounded">AI</span>
+              </div>
+              <p class="text-terminal-text mb-3">
+                Created an intelligent trading system using machine learning to analyze market patterns 
+                and execute trades. Achieved 23% better performance than traditional strategies.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-3">
+                <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Python</span>
+                <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Pandas</span>
+                <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">Scikit-learn</span>
+                <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Redis</span>
+                <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">AWS</span>
+              </div>
+              <div class="flex gap-3">
+                <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
+                <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Research Paper →</a>
+              </div>
+            </div>
+          </div>`,
+          type: 'normal',
+          animate: false,
+          className: 'mb-4'
+        }
+      ];
+
+    case 'achievements':
+      return [
+        {
+          id: commandId,
+          content: '<span class="text-terminal-green">$ cat achievements.log | sort -r</span>',
+          type: 'success',
+          animate: true,
+          speed: 20 // Faster speed
+        },
+        {
+          id: commandId + 1,
+          content: `<div class="mt-4 space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="space-y-3">
+                <h3 class="text-terminal-green font-semibold text-lg border-b border-terminal-green/30 pb-1">🏆 Certifications</h3>
+                <div class="space-y-2">
+                  <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
+                    <span class="text-terminal-green">✓</span>
+                    <div>
+                      <div class="text-terminal-text font-medium">AWS Solutions Architect</div>
+                      <div class="text-terminal-text/60 text-sm">Amazon Web Services • 2024</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
+                    <span class="text-terminal-green">✓</span>
+                    <div>
+                      <div class="text-terminal-text font-medium">Machine Learning Specialization</div>
+                      <div class="text-terminal-text/60 text-sm">DeepLearning.AI • 2023</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
+                    <span class="text-terminal-green">✓</span>
+                    <div>
+                      <div class="text-terminal-text font-medium">Azure Developer Associate</div>
+                      <div class="text-terminal-text/60 text-sm">Microsoft • 2023</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="space-y-3">
+                <h3 class="text-terminal-blue font-semibold text-lg border-b border-terminal-blue/30 pb-1">💼 Job Simulations</h3>
+                <div class="space-y-2">
+                  <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
+                    <span class="text-terminal-blue">●</span>
+                    <div>
+                      <div class="text-terminal-text font-medium">Software Engineering Virtual Experience</div>
+                      <div class="text-terminal-text/60 text-sm">J.P. Morgan Chase & Co. • 2024</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
+                    <span class="text-terminal-blue">●</span>
+                    <div>
+                      <div class="text-terminal-text font-medium">Backend Engineering Program</div>
+                      <div class="text-terminal-text/60 text-sm">Skyscanner • 2024</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
+                    <span class="text-terminal-blue">●</span>
+                    <div>
+                      <div class="text-terminal-text font-medium">Data Science Virtual Internship</div>
+                      <div class="text-terminal-text/60 text-sm">Accenture • 2023</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-6">
+              <h3 class="text-yellow-500 font-semibold text-lg border-b border-yellow-500/30 pb-1 mb-3">🚀 Hackathons & Competitions</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="flex items-center gap-3 p-2 border border-yellow-500/20 rounded">
+                  <span class="text-yellow-500">🥇</span>
+                  <div>
+                    <div class="text-terminal-text font-medium">1st Place - AI Healthcare Hackathon</div>
+                    <div class="text-terminal-text/60 text-sm">TechCrunch Disrupt • 2024</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-2 border border-yellow-500/20 rounded">
+                  <span class="text-yellow-500">🥈</span>
+                  <div>
+                    <div class="text-terminal-text font-medium">2nd Place - FinTech Innovation Challenge</div>
+                    <div class="text-terminal-text/60 text-sm">MIT • 2023</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`,
+          type: 'normal',
+          animate: false,
+          className: 'mb-4'
+        }
+      ];
+
+    case 'contact':
+      return [
+        {
+          id: commandId,
+          content: '<span class="text-terminal-green">Establishing secure connections...</span>',
+          type: 'success',
+          animate: true,
+          speed: 25 // Faster speed
+        },
+        {
+          id: commandId + 1,
+          content: `<div class="mt-4 space-y-4">
+            <div class="text-terminal-text">
+              <p class="mb-4">Choose your preferred communication channel:</p>
+              <div class="space-y-3">
+                <div onclick="window.open('https://mail.google.com', '_blank')" class="flex items-center gap-3 p-3 border border-terminal-green/30 rounded hover:border-terminal-green hover:bg-terminal-green/5 transition-all cursor-pointer">
+                  <span class="text-terminal-green font-mono">1.</span>
+                  <span class="text-terminal-text">📧</span>
+                  <div class="flex-1">
+                    <div class="text-terminal-text font-medium">Email</div>
+                    <div class="text-terminal-text/60 text-sm">your.email@example.com</div>
+                  </div>
+                  <span class="text-terminal-green text-sm">→</span>
+                </div>
+                
+                <div onclick="window.open('https://linkedin.com/login', '_blank')" class="flex items-center gap-3 p-3 border border-terminal-blue/30 rounded hover:border-terminal-blue hover:bg-terminal-blue/5 transition-all cursor-pointer">
+                  <span class="text-terminal-blue font-mono">2.</span>
+                  <span class="text-terminal-text">💼</span>
+                  <div class="flex-1">
+                    <div class="text-terminal-text font-medium">LinkedIn</div>
+                    <div class="text-terminal-text/60 text-sm">Professional networking</div>
+                  </div>
+                  <span class="text-terminal-blue text-sm">→</span>
+                </div>
+                
+                <div onclick="window.open('https://github.com/login', '_blank')" class="flex items-center gap-3 p-3 border border-purple-500/30 rounded hover:border-purple-500 hover:bg-purple-500/5 transition-all cursor-pointer">
+                  <span class="text-purple-500 font-mono">3.</span>
+                  <span class="text-terminal-text">🐙</span>
+                  <div class="flex-1">
+                    <div class="text-terminal-text font-medium">GitHub</div>
+                    <div class="text-terminal-text/60 text-sm">Check out my code</div>
+                  </div>
+                  <span class="text-purple-500 text-sm">→</span>
+                </div>
+                
+                <div onclick="window.open('https://twitter.com/login', '_blank')" class="flex items-center gap-3 p-3 border border-cyan-500/30 rounded hover:border-cyan-500 hover:bg-cyan-500/5 transition-all cursor-pointer">
+                  <span class="text-cyan-500 font-mono">4.</span>
+                  <span class="text-terminal-text">🐦</span>
+                  <div class="flex-1">
+                    <div class="text-terminal-text font-medium">Twitter/X</div>
+                    <div class="text-terminal-text/60 text-sm">Tech discussions & updates</div>
+                  </div>
+                  <span class="text-cyan-500 text-sm">→</span>
+                </div>
+              </div>
+              
+              <div class="mt-6 p-4 border border-terminal-green/30 rounded bg-terminal-green/5">
+                <div class="text-terminal-green text-sm font-mono">$ echo "Let's build something together."</div>
+              </div>
+            </div>
+          </div>`,
+          type: 'normal',
+          animate: false,
+          className: 'mb-4'
+        }
+      ];
+
+    case 'fun':
+      const funCommands = ['cowsay', 'matrix', 'snake', 'fortune'];
+      const randomFun = funCommands[Math.floor(Math.random() * funCommands.length)];
+      
+      return [
+        {
+          id: commandId,
+          content: '<span class="text-terminal-green">Initializing fun protocols...</span>',
+          type: 'success',
+          animate: true,
+          speed: 25 // Faster speed
+        },
+        {
+          id: commandId + 1,
+          content: `<div class="mt-4">
+            <div class="text-terminal-text mb-4">Welcome to the fun zone! Here are some easter eggs to try:</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="border border-terminal-green/30 rounded p-3 hover:border-terminal-green transition-all">
+                <div class="text-terminal-green font-mono">$ cowsay "Hello World!"</div>
+                <div class="text-terminal-text/60 text-sm mt-1">Classic ASCII cow says your message</div>
+              </div>
+              <div class="border border-terminal-blue/30 rounded p-3 hover:border-terminal-blue transition-all">
+                <div class="text-terminal-blue font-mono">$ matrix</div>
+                <div class="text-terminal-text/60 text-sm mt-1">Enter the Matrix digital rain</div>
+              </div>
+              <div class="border border-yellow-500/30 rounded p-3 hover:border-yellow-500 transition-all">
+                <div class="text-yellow-500 font-mono">$ snake</div>
+                <div class="text-terminal-text/60 text-sm mt-1">Play a classic Snake game</div>
+              </div>
+              <div class="border border-purple-500/30 rounded p-3 hover:border-purple-500 transition-all">
+                <div class="text-purple-500 font-mono">$ fortune</div>
+                <div class="text-terminal-text/60 text-sm mt-1">Display a random fortune</div>
+              </div>
+            </div>
+            <div class="mt-4 p-3 bg-terminal-green/10 border border-terminal-green/30 rounded">
+              <div class="text-terminal-green font-mono">Pro tip:</div>
+              <div class="text-terminal-text text-sm mt-1">Try typing <code class="bg-terminal-bg px-1 rounded">konami</code> for a special surprise! 🎮</div>
+            </div>
+          </div>`,
+          type: 'normal',
+          animate: false
+        }
+      ];
+
+    case 'help':
+      return [
+        {
+          id: commandId,
+          content: '<span class="text-terminal-green">Available commands:</span>',
+          type: 'success',
+          animate: true,
+          speed: 20 // Faster speed
+        },
+        {
+          id: commandId + 1,
+          content: `<div class="mt-4 space-y-2">
+            ${Object.entries(COMMAND_DESCRIPTIONS).map(([cmd, desc]) => 
+              `<div class="flex">
+                <span class="text-terminal-green font-mono w-20">${cmd}</span>
+                <span class="text-terminal-text">- ${desc}</span>
+              </div>`
+            ).join('')}
+            <div class="mt-4 text-terminal-text/60 text-sm">
+              <p>💡 Tips:</p>
+              <ul class="list-disc list-inside space-y-1 mt-2">
+                <li>Use ↑/↓ arrow keys to browse command history</li>
+                <li>Press Tab for command autocompletion</li>
+                <li>Type a command and press Enter to execute</li>
+              </ul>
+            </div>
+          </div>`,
+          type: 'normal',
+          animate: false
+        }
+      ];
+
+    case 'clear':
+      // This will be handled by the terminal hook
+      return {
+        id: commandId,
+        content: '',
+        type: 'normal',
+        animate: false
+      };
+
+    case 'echo':
+      const message = fullArgs || 'Hello World!';
+      return {
+        id: commandId,
+        content: message,
+        type: 'normal',
+        animate: true,
+        speed: 15 // Faster speed
+      };
+
+    default:
+      const suggestions = ['help', 'about', 'projects'];
+      const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+      
+      return {
+        id: commandId,
+        content: `<span class="text-red-400">command not found: ${baseCommand}</span><br>
+                 <span class="text-terminal-text/60">Did you mean '<span class="text-terminal-green">${randomSuggestion}</span>'? Type '<span class="text-terminal-green">help</span>' to see all available commands.</span>`,
+        type: 'error',
+        animate: true,
+        speed: 20 // Faster speed
+      };
+  }
+};
