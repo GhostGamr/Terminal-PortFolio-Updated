@@ -25,6 +25,12 @@ export const useTerminal = () => {
       animate: false
     });
 
+    // Handle clear command specially
+    if (command.toLowerCase().trim() === 'clear') {
+      setTimeout(() => setOutput([]), 100);
+      return;
+    }
+
     // Execute command and add result to output
     const result = executeTerminalCommand(command);
     addOutput(result);

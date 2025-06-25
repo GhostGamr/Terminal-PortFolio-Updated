@@ -23,7 +23,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: `<div class="text-center text-terminal-text text-lg font-semibold mb-6">${TAGLINE}</div>`,
           type: 'normal',
           animate: false,
-          speed: 15 // Faster speed
+          speed: 15
         },
         {
           id: commandId + 2,
@@ -48,7 +48,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: '<span class="text-terminal-green">Gathering facts… Done. Printing biography.</span>',
           type: 'success',
           animate: true,
-          speed: 20 // Faster speed
+          speed: 20
         },
         {
           id: commandId + 1,
@@ -72,7 +72,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           </div>`,
           type: 'normal',
           animate: true,
-          speed: 15 // Faster speed
+          speed: 15
         }
       ];
 
@@ -83,7 +83,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: '<span class="text-terminal-green">Loading service catalog...</span>',
           type: 'success',
           animate: true,
-          speed: 25 // Faster speed
+          speed: 25
         },
         {
           id: commandId + 1,
@@ -142,7 +142,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: '<span class="text-terminal-green">$ git branch --list-projects</span>',
           type: 'success',
           animate: true,
-          speed: 20 // Faster speed
+          speed: 20
         },
         {
           id: commandId + 1,
@@ -226,7 +226,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: '<span class="text-terminal-green">$ cat achievements.log | sort -r</span>',
           type: 'success',
           animate: true,
-          speed: 20 // Faster speed
+          speed: 20
         },
         {
           id: commandId + 1,
@@ -320,7 +320,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: '<span class="text-terminal-green">Establishing secure connections...</span>',
           type: 'success',
           animate: true,
-          speed: 25 // Faster speed
+          speed: 25
         },
         {
           id: commandId + 1,
@@ -381,16 +381,13 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
       ];
 
     case 'fun':
-      const funCommands = ['cowsay', 'matrix', 'snake', 'fortune'];
-      const randomFun = funCommands[Math.floor(Math.random() * funCommands.length)];
-      
       return [
         {
           id: commandId,
           content: '<span class="text-terminal-green">Initializing fun protocols...</span>',
           type: 'success',
           animate: true,
-          speed: 25 // Faster speed
+          speed: 25
         },
         {
           id: commandId + 1,
@@ -424,6 +421,53 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         }
       ];
 
+    // Game Commands
+    case 'cowsay':
+      const cowMessage = fullArgs || 'Hello World!';
+      return {
+        id: commandId,
+        content: `<div id="cowsay-${commandId}"></div>`,
+        type: 'normal',
+        animate: false,
+        className: 'cowsay-container'
+      };
+
+    case 'matrix':
+      return {
+        id: commandId,
+        content: `<div id="matrix-${commandId}"></div>`,
+        type: 'normal',
+        animate: false,
+        className: 'matrix-container'
+      };
+
+    case 'snake':
+      return {
+        id: commandId,
+        content: `<div id="snake-${commandId}"></div>`,
+        type: 'normal',
+        animate: false,
+        className: 'snake-container'
+      };
+
+    case 'fortune':
+      return {
+        id: commandId,
+        content: `<div id="fortune-${commandId}"></div>`,
+        type: 'normal',
+        animate: false,
+        className: 'fortune-container'
+      };
+
+    case 'konami':
+      return {
+        id: commandId,
+        content: `<div id="konami-${commandId}"></div>`,
+        type: 'normal',
+        animate: false,
+        className: 'konami-container'
+      };
+
     case 'help':
       return [
         {
@@ -431,7 +475,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: '<span class="text-terminal-green">Available commands:</span>',
           type: 'success',
           animate: true,
-          speed: 20 // Faster speed
+          speed: 20
         },
         {
           id: commandId + 1,
@@ -443,11 +487,37 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
               </div>`
             ).join('')}
             <div class="mt-4 text-terminal-text/60 text-sm">
+              <p>🎮 Fun Commands:</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+                <div class="flex">
+                  <span class="text-terminal-green font-mono w-20">cowsay</span>
+                  <span class="text-terminal-text">- ASCII cow with message</span>
+                </div>
+                <div class="flex">
+                  <span class="text-terminal-blue font-mono w-20">matrix</span>
+                  <span class="text-terminal-text">- Matrix digital rain</span>
+                </div>
+                <div class="flex">
+                  <span class="text-yellow-500 font-mono w-20">snake</span>
+                  <span class="text-terminal-text">- Play Snake game</span>
+                </div>
+                <div class="flex">
+                  <span class="text-purple-500 font-mono w-20">fortune</span>
+                  <span class="text-terminal-text">- Random fortune cookie</span>
+                </div>
+                <div class="flex">
+                  <span class="text-red-500 font-mono w-20">konami</span>
+                  <span class="text-terminal-text">- Secret easter egg</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 text-terminal-text/60 text-sm">
               <p>💡 Tips:</p>
               <ul class="list-disc list-inside space-y-1 mt-2">
                 <li>Use ↑/↓ arrow keys to browse command history</li>
                 <li>Press Tab for command autocompletion</li>
                 <li>Type a command and press Enter to execute</li>
+                <li>Try 'cowsay your message' to make the cow say something custom</li>
               </ul>
             </div>
           </div>`,
@@ -457,7 +527,6 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
       ];
 
     case 'clear':
-      // This will be handled by the terminal hook
       return {
         id: commandId,
         content: '',
@@ -472,11 +541,11 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         content: message,
         type: 'normal',
         animate: true,
-        speed: 15 // Faster speed
+        speed: 15
       };
 
     default:
-      const suggestions = ['help', 'about', 'projects'];
+      const suggestions = ['help', 'about', 'projects', 'fun'];
       const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
       
       return {
@@ -485,7 +554,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                  <span class="text-terminal-text/60">Did you mean '<span class="text-terminal-green">${randomSuggestion}</span>'? Type '<span class="text-terminal-green">help</span>' to see all available commands.</span>`,
         type: 'error',
         animate: true,
-        speed: 20 // Faster speed
+        speed: 20
       };
   }
 };

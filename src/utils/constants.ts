@@ -23,7 +23,12 @@ export const AVAILABLE_COMMANDS = [
   'fun',
   'help',
   'clear',
-  'echo'
+  'echo',
+  'cowsay',
+  'matrix',
+  'snake',
+  'fortune',
+  'konami'
 ];
 
 export const COMMAND_DESCRIPTIONS = {
