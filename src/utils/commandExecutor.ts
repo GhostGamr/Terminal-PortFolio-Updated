@@ -50,11 +50,11 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         {
           id: commandId + 2,
           content: `<div class="flex gap-4 justify-center mt-4">
-            <button onclick="window.open('https://youtube.com', '_blank')" class="px-4 py-2 bg-terminal-green/20 text-terminal-green border border-terminal-green rounded hover:bg-terminal-green hover:text-terminal-bg transition-all duration-300 cursor-pointer">
+            <button onclick="window.open('https://github.com/GhostGamr', '_blank')" class="px-4 py-2 bg-terminal-green/20 text-terminal-green border border-terminal-green rounded hover:bg-terminal-green hover:text-terminal-bg transition-all duration-300 cursor-pointer">
               $ ./see-my-work
             </button>
-            <button onclick="window.open('https://youtube.com', '_blank')" class="px-4 py-2 bg-terminal-blue/20 text-terminal-blue border border-terminal-blue rounded hover:bg-terminal-blue hover:text-terminal-bg transition-all duration-300 cursor-pointer">
-              $ ./contact-me
+            <button onclick="window.open('https://www.linkedin.com/in/harshit-raj-mishra-641111306/', '_blank')" class="px-4 py-2 bg-terminal-blue/20 text-terminal-blue border border-terminal-blue rounded hover:bg-terminal-blue hover:text-terminal-bg transition-all duration-300 cursor-pointer">
+              $ ./connect-with-me
             </button>
           </div>`,
           type: 'normal',
@@ -81,17 +81,17 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: `<div class="mt-4 space-y-4">
             <p class="text-terminal-text">
               Hey there! I'm a passionate full-stack developer who loves crafting digital experiences 
-              that make a difference. When I'm not coding, you'll find me exploring the latest in AI, 
-              contributing to open source, or perfecting my coffee brewing technique ☕
+              that make a difference. When I'm not coding, you'll find me studying something, playing a sport, 
+              contributing to open source, or binge watching a show...
             </p>
             <div class="mt-4">
               <h3 class="text-terminal-green font-semibold mb-2">$ interests --list</h3>
               <ul class="space-y-1 pl-4">
                 <li class="text-terminal-text">🚀 Building scalable web applications</li>
                 <li class="text-terminal-text">🤖 Machine Learning & AI development</li>
-                <li class="text-terminal-text">🏏 Cricket enthusiast (both playing and watching)</li>
-                <li class="text-terminal-text">🍳 Experimenting with new recipes</li>
-                <li class="text-terminal-text">🎤 Karaoke nights (yes, I sing!)</li>
+                <li class="text-terminal-text">🏏 Sports</li>
+                <li class="text-terminal-text">🍳 Playing Drums</li>
+                <li class="text-terminal-text">🎤 Video Games</li>
                 <li class="text-terminal-text">📚 Always learning something new</li>
               </ul>
             </div>
@@ -381,7 +381,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
               <p class="mb-4">Choose your preferred communication channel:</p>
               <div class="space-y-3">
                 <!-- Email Contact -->
-                <div onclick="window.open('https://mail.google.com', '_blank')" class="flex items-center gap-3 p-3 border border-terminal-green/30 rounded hover:border-terminal-green hover:bg-terminal-green/5 transition-all cursor-pointer">
+                <div onclick="window.open('https://mail.google.com/mail/u/0/#inbox?compose=new', '_blank')" class="flex items-center gap-3 p-3 border border-terminal-green/30 rounded hover:border-terminal-green hover:bg-terminal-green/5 transition-all cursor-pointer">
                   <span class="text-terminal-green font-mono">1.</span>
                   <span class="text-terminal-text">📧</span>
                   <div class="flex-1">
@@ -392,7 +392,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                 </div>
                 
                 <!-- LinkedIn Contact -->
-                <div onclick="window.open('https://linkedin.com/login', '_blank')" class="flex items-center gap-3 p-3 border border-terminal-blue/30 rounded hover:border-terminal-blue hover:bg-terminal-blue/5 transition-all cursor-pointer">
+                <div onclick="window.open('https://www.linkedin.com/in/harshit-raj-mishra-641111306/', '_blank')" class="flex items-center gap-3 p-3 border border-terminal-blue/30 rounded hover:border-terminal-blue hover:bg-terminal-blue/5 transition-all cursor-pointer">
                   <span class="text-terminal-blue font-mono">2.</span>
                   <span class="text-terminal-text">💼</span>
                   <div class="flex-1">
@@ -403,7 +403,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                 </div>
                 
                 <!-- GitHub Contact -->
-                <div onclick="window.open('https://github.com/login', '_blank')" class="flex items-center gap-3 p-3 border border-purple-500/30 rounded hover:border-purple-500 hover:bg-purple-500/5 transition-all cursor-pointer">
+                <div onclick="window.open('https://github.com/GhostGamr', '_blank')" class="flex items-center gap-3 p-3 border border-purple-500/30 rounded hover:border-purple-500 hover:bg-purple-500/5 transition-all cursor-pointer">
                   <span class="text-purple-500 font-mono">3.</span>
                   <span class="text-terminal-text">🐙</span>
                   <div class="flex-1">
@@ -414,7 +414,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                 </div>
                 
                 <!-- Twitter/X Contact -->
-                <div onclick="window.open('https://twitter.com/login', '_blank')" class="flex items-center gap-3 p-3 border border-cyan-500/30 rounded hover:border-cyan-500 hover:bg-cyan-500/5 transition-all cursor-pointer">
+                <div onclick="window.open('https://x.com/_thisishrm', '_blank')" class="flex items-center gap-3 p-3 border border-cyan-500/30 rounded hover:border-cyan-500 hover:bg-cyan-500/5 transition-all cursor-pointer">
                   <span class="text-cyan-500 font-mono">4.</span>
                   <span class="text-terminal-text">🐦</span>
                   <div class="flex-1">
@@ -650,7 +650,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                  <span class="text-terminal-text/60">Did you mean '<span class="text-terminal-green">${randomSuggestion}</span>'? Type '<span class="text-terminal-green">help</span>' to see all available commands.</span>`,
         type: 'error',
         animate: true,
-        speed: 20
+        speed: 25
       };
   }
 };

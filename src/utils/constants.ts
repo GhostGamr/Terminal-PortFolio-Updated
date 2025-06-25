@@ -14,7 +14,7 @@ export const ASCII_BANNER = `
 `;
 
 // Tagline displayed below the banner
-export const TAGLINE = "Full Stack Developer | AI Enthusiast | Problem Solver";
+export const TAGLINE = "Full Stack Developer | AI Enthusiast | Problem Solver | Dreamer (Procastinator)";
 
 // List of all available terminal commands
 export const AVAILABLE_COMMANDS = [
