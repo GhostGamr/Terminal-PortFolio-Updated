@@ -60,6 +60,15 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           type: 'normal',
           animate: false,
           className: 'mb-6'
+        },
+        {
+          id: commandId + 3,
+          content: `<div class="text-terminal-text text-sm text-center mt-4">
+            Type <span class="text-terminal-green">help</span> to see available commands.
+          </div>`,
+          type: 'normal',
+          animate: false,
+          className: 'mb-6'
         }
       ];
 
