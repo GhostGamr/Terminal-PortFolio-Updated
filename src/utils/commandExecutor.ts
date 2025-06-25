@@ -194,74 +194,75 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         {
           id: commandId + 1,
           content: `<div class="mt-4 space-y-6">
-            <!-- AI Voice Assistant Project -->
-            <div class="border border-terminal-green/30 rounded-lg p-4 hover:border-terminal-green hover:shadow-lg hover:shadow-terminal-green/20 transition-all duration-300">
-              <div class="flex flex-wrap items-center justify-between mb-3">
-                <h3 class="text-terminal-green font-semibold text-lg">AI Voice Assistant Platform</h3>
-                <span class="text-xs bg-terminal-green/20 text-terminal-green px-2 py-1 rounded">VoiceTech</span>
-              </div>
-              <p class="text-terminal-text mb-3">
-                Built a comprehensive voice assistant platform with real-time speech recognition, 
-                natural language understanding, and multi-language support. Handles 10k+ daily interactions.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Python</span>
-                <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">FastAPI</span>
-                <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">React</span>
-                <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">TensorFlow</span>
-                <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">WebRTC</span>
-              </div>
-              <div class="flex gap-3">
-                <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
-                <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Live Demo →</a>
-              </div>
-            </div>
+          Projects are loading:
+            // <!-- AI Voice Assistant Project -->
+            // <div class="border border-terminal-green/30 rounded-lg p-4 hover:border-terminal-green hover:shadow-lg hover:shadow-terminal-green/20 transition-all duration-300">
+            //   <div class="flex flex-wrap items-center justify-between mb-3">
+            //     <h3 class="text-terminal-green font-semibold text-lg">AI Voice Assistant Platform</h3>
+            //     <span class="text-xs bg-terminal-green/20 text-terminal-green px-2 py-1 rounded">VoiceTech</span>
+            //   </div>
+            //   <p class="text-terminal-text mb-3">
+            //     Built a comprehensive voice assistant platform with real-time speech recognition, 
+            //     natural language understanding, and multi-language support. Handles 10k+ daily interactions.
+            //   </p>
+            //   <div class="flex flex-wrap gap-2 mb-3">
+            //     <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Python</span>
+            //     <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">FastAPI</span>
+            //     <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">React</span>
+            //     <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">TensorFlow</span>
+            //     <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">WebRTC</span>
+            //   </div>
+            //   <div class="flex gap-3">
+            //     <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
+            //     <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Live Demo →</a>
+            //   </div>
+            // </div>
 
-            <!-- HealthTech Analytics Project -->
-            <div class="border border-terminal-blue/30 rounded-lg p-4 hover:border-terminal-blue hover:shadow-lg hover:shadow-terminal-blue/20 transition-all duration-300">
-              <div class="flex flex-wrap items-center justify-between mb-3">
-                <h3 class="text-terminal-blue font-semibold text-lg">HealthTech Analytics Dashboard</h3>
-                <span class="text-xs bg-terminal-blue/20 text-terminal-blue px-2 py-1 rounded">HealthTech</span>
-              </div>
-              <p class="text-terminal-text mb-3">
-                Developed a real-time healthcare analytics platform that processes patient data, 
-                generates insights, and provides predictive analytics for better patient outcomes.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">TypeScript</span>
-                <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Next.js</span>
-                <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">D3.js</span>
-                <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">PostgreSQL</span>
-                <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">Docker</span>
-              </div>
-              <div class="flex gap-3">
-                <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
-                <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Case Study →</a>
-              </div>
-            </div>
+            // <!-- HealthTech Analytics Project -->
+            // <div class="border border-terminal-blue/30 rounded-lg p-4 hover:border-terminal-blue hover:shadow-lg hover:shadow-terminal-blue/20 transition-all duration-300">
+            //   <div class="flex flex-wrap items-center justify-between mb-3">
+            //     <h3 class="text-terminal-blue font-semibold text-lg">HealthTech Analytics Dashboard</h3>
+            //     <span class="text-xs bg-terminal-blue/20 text-terminal-blue px-2 py-1 rounded">HealthTech</span>
+            //   </div>
+            //   <p class="text-terminal-text mb-3">
+            //     Developed a real-time healthcare analytics platform that processes patient data, 
+            //     generates insights, and provides predictive analytics for better patient outcomes.
+            //   </p>
+            //   <div class="flex flex-wrap gap-2 mb-3">
+            //     <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">TypeScript</span>
+            //     <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Next.js</span>
+            //     <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">D3.js</span>
+            //     <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">PostgreSQL</span>
+            //     <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">Docker</span>
+            //   </div>
+            //   <div class="flex gap-3">
+            //     <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
+            //     <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Case Study →</a>
+            //   </div>
+            // </div>
 
-            <!-- Smart Trading Algorithm Project -->
-            <div class="border border-yellow-500/30 rounded-lg p-4 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300">
-              <div class="flex flex-wrap items-center justify-between mb-3">
-                <h3 class="text-yellow-500 font-semibold text-lg">Smart Trading Algorithm</h3>
-                <span class="text-xs bg-yellow-500/20 text-yellow-500 px-2 py-1 rounded">AI</span>
-              </div>
-              <p class="text-terminal-text mb-3">
-                Created an intelligent trading system using machine learning to analyze market patterns 
-                and execute trades. Achieved 23% better performance than traditional strategies.
-              </p>
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Python</span>
-                <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Pandas</span>
-                <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">Scikit-learn</span>
-                <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Redis</span>
-                <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">AWS</span>
-              </div>
-              <div class="flex gap-3">
-                <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
-                <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Research Paper →</a>
-              </div>
-            </div>
+            // <!-- Smart Trading Algorithm Project -->
+            // <div class="border border-yellow-500/30 rounded-lg p-4 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300">
+            //   <div class="flex flex-wrap items-center justify-between mb-3">
+            //     <h3 class="text-yellow-500 font-semibold text-lg">Smart Trading Algorithm</h3>
+            //     <span class="text-xs bg-yellow-500/20 text-yellow-500 px-2 py-1 rounded">AI</span>
+            //   </div>
+            //   <p class="text-terminal-text mb-3">
+            //     Created an intelligent trading system using machine learning to analyze market patterns 
+            //     and execute trades. Achieved 23% better performance than traditional strategies.
+            //   </p>
+            //   <div class="flex flex-wrap gap-2 mb-3">
+            //     <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Python</span>
+            //     <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Pandas</span>
+            //     <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">Scikit-learn</span>
+            //     <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Redis</span>
+            //     <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">AWS</span>
+            //   </div>
+            //   <div class="flex gap-3">
+            //     <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
+            //     <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Research Paper →</a>
+            //   </div>
+            // </div>
           </div>`,
           type: 'normal',
           animate: false,
@@ -284,86 +285,89 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         },
         {
           id: commandId + 1,
-          content: `<div class="mt-4 space-y-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Certifications Section -->
-              <div class="space-y-3">
-                <h3 class="text-terminal-green font-semibold text-lg border-b border-terminal-green/30 pb-1">🏆 Certifications</h3>
-                <div class="space-y-2">
-                  <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
-                    <span class="text-terminal-green">✓</span>
-                    <div>
-                      <div class="text-terminal-text font-medium">AWS Solutions Architect</div>
-                      <div class="text-terminal-text/60 text-sm">Amazon Web Services • 2024</div>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
-                    <span class="text-terminal-green">✓</span>
-                    <div>
-                      <div class="text-terminal-text font-medium">Machine Learning Specialization</div>
-                      <div class="text-terminal-text/60 text-sm">DeepLearning.AI • 2023</div>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
-                    <span class="text-terminal-green">✓</span>
-                    <div>
-                      <div class="text-terminal-text font-medium">Azure Developer Associate</div>
-                      <div class="text-terminal-text/60 text-sm">Microsoft • 2023</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          content: `<div class="text-terminal-text mt-4">
+            <p>Achievements are loading:</p>
+            </div>`,
+          // content: `<div class="mt-4 space-y-4">
+          //   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          //     <!-- Certifications Section -->
+          //     <div class="space-y-3">
+          //       <h3 class="text-terminal-green font-semibold text-lg border-b border-terminal-green/30 pb-1">🏆 Certifications</h3>
+          //       <div class="space-y-2">
+          //         <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
+          //           <span class="text-terminal-green">✓</span>
+          //           <div>
+          //             <div class="text-terminal-text font-medium">AWS Solutions Architect</div>
+          //             <div class="text-terminal-text/60 text-sm">Amazon Web Services • 2024</div>
+          //           </div>
+          //         </div>
+          //         <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
+          //           <span class="text-terminal-green">✓</span>
+          //           <div>
+          //             <div class="text-terminal-text font-medium">Machine Learning Specialization</div>
+          //             <div class="text-terminal-text/60 text-sm">DeepLearning.AI • 2023</div>
+          //           </div>
+          //         </div>
+          //         <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
+          //           <span class="text-terminal-green">✓</span>
+          //           <div>
+          //             <div class="text-terminal-text font-medium">Azure Developer Associate</div>
+          //             <div class="text-terminal-text/60 text-sm">Microsoft • 2023</div>
+          //           </div>
+          //         </div>
+          //       </div>
+          //     </div>
               
-              <!-- Job Simulations Section -->
-              <div class="space-y-3">
-                <h3 class="text-terminal-blue font-semibold text-lg border-b border-terminal-blue/30 pb-1">💼 Job Simulations</h3>
-                <div class="space-y-2">
-                  <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
-                    <span class="text-terminal-blue">●</span>
-                    <div>
-                      <div class="text-terminal-text font-medium">Software Engineering Virtual Experience</div>
-                      <div class="text-terminal-text/60 text-sm">J.P. Morgan Chase & Co. • 2024</div>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
-                    <span class="text-terminal-blue">●</span>
-                    <div>
-                      <div class="text-terminal-text font-medium">Backend Engineering Program</div>
-                      <div class="text-terminal-text/60 text-sm">Skyscanner • 2024</div>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
-                    <span class="text-terminal-blue">●</span>
-                    <div>
-                      <div class="text-terminal-text font-medium">Data Science Virtual Internship</div>
-                      <div class="text-terminal-text/60 text-sm">Accenture • 2023</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          //     <!-- Job Simulations Section -->
+          //     <div class="space-y-3">
+          //       <h3 class="text-terminal-blue font-semibold text-lg border-b border-terminal-blue/30 pb-1">💼 Job Simulations</h3>
+          //       <div class="space-y-2">
+          //         <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
+          //           <span class="text-terminal-blue">●</span>
+          //           <div>
+          //             <div class="text-terminal-text font-medium">Software Engineering Virtual Experience</div>
+          //             <div class="text-terminal-text/60 text-sm">J.P. Morgan Chase & Co. • 2024</div>
+          //           </div>
+          //         </div>
+          //         <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
+          //           <span class="text-terminal-blue">●</span>
+          //           <div>
+          //             <div class="text-terminal-text font-medium">Backend Engineering Program</div>
+          //             <div class="text-terminal-text/60 text-sm">Skyscanner • 2024</div>
+          //           </div>
+          //         </div>
+          //         <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
+          //           <span class="text-terminal-blue">●</span>
+          //           <div>
+          //             <div class="text-terminal-text font-medium">Data Science Virtual Internship</div>
+          //             <div class="text-terminal-text/60 text-sm">Accenture • 2023</div>
+          //           </div>
+          //         </div>
+          //       </div>
+          //     </div>
+          //   </div>
             
-            <!-- Hackathons & Competitions Section -->
-            <div class="mt-6">
-              <h3 class="text-yellow-500 font-semibold text-lg border-b border-yellow-500/30 pb-1 mb-3">🚀 Hackathons & Competitions</h3>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div class="flex items-center gap-3 p-2 border border-yellow-500/20 rounded">
-                  <span class="text-yellow-500">🥇</span>
-                  <div>
-                    <div class="text-terminal-text font-medium">1st Place - AI Healthcare Hackathon</div>
-                    <div class="text-terminal-text/60 text-sm">TechCrunch Disrupt • 2024</div>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3 p-2 border border-yellow-500/20 rounded">
-                  <span class="text-yellow-500">🥈</span>
-                  <div>
-                    <div class="text-terminal-text font-medium">2nd Place - FinTech Innovation Challenge</div>
-                    <div class="text-terminal-text/60 text-sm">MIT • 2023</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>`,
+          //   <!-- Hackathons & Competitions Section -->
+          //   <div class="mt-6">
+          //     <h3 class="text-yellow-500 font-semibold text-lg border-b border-yellow-500/30 pb-1 mb-3">🚀 Hackathons & Competitions</h3>
+          //     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          //       <div class="flex items-center gap-3 p-2 border border-yellow-500/20 rounded">
+          //         <span class="text-yellow-500">🥇</span>
+          //         <div>
+          //           <div class="text-terminal-text font-medium">1st Place - AI Healthcare Hackathon</div>
+          //           <div class="text-terminal-text/60 text-sm">TechCrunch Disrupt • 2024</div>
+          //         </div>
+          //       </div>
+          //       <div class="flex items-center gap-3 p-2 border border-yellow-500/20 rounded">
+          //         <span class="text-yellow-500">🥈</span>
+          //         <div>
+          //           <div class="text-terminal-text font-medium">2nd Place - FinTech Innovation Challenge</div>
+          //           <div class="text-terminal-text/60 text-sm">MIT • 2023</div>
+          //         </div>
+          //       </div>
+          //     </div>
+          //   </div>
+          // </div>`,
           type: 'normal',
           animate: false,
           className: 'mb-4'
