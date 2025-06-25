@@ -1,14 +1,36 @@
 import { OutputLine } from '../types/terminal';
 import { ASCII_BANNER, TAGLINE, COMMAND_DESCRIPTIONS } from './constants';
-import { isValidCommand } from './commands';
 
+/**
+ * Command Executor
+ * 
+ * Central command processing system that handles all terminal commands.
+ * Each command returns OutputLine(s) that get displayed in the terminal.
+ * 
+ * Supported commands:
+ * - banner: Display ASCII art banner
+ * - about: Personal information
+ * - services: Professional services
+ * - projects: Portfolio showcase
+ * - achievements: Certifications and accomplishments
+ * - contact: Contact information
+ * - fun: Games and easter eggs overview
+ * - Game commands: cowsay, matrix, snake, fortune, konami
+ * - Utility commands: help, clear, echo
+ */
 export const executeTerminalCommand = (command: string): OutputLine | OutputLine[] => {
+  // Parse command and arguments
   const [baseCommand, ...args] = command.toLowerCase().split(' ');
   const fullArgs = args.join(' ');
-
+  
+  // Generate unique ID for this command execution
   const commandId = Date.now();
 
   switch (baseCommand) {
+    /**
+     * BANNER COMMAND
+     * Displays the main ASCII art banner with GHOSTGAMR branding
+     */
     case 'banner':
       return [
         {
@@ -41,6 +63,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         }
       ];
 
+    /**
+     * ABOUT COMMAND
+     * Personal information, interests, and background
+     */
     case 'about':
       return [
         {
@@ -76,6 +102,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         }
       ];
 
+    /**
+     * SERVICES COMMAND
+     * Professional services and expertise areas
+     */
     case 'services':
       return [
         {
@@ -88,6 +118,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         {
           id: commandId + 1,
           content: `<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Web Development Service Card -->
             <div class="border border-terminal-green/30 rounded-lg p-4 hover:border-terminal-green hover:shadow-lg hover:shadow-terminal-green/20 transition-all duration-300">
               <h3 class="text-terminal-green font-semibold text-lg mb-2">Web Development</h3>
               <ul class="space-y-1 text-terminal-text">
@@ -98,6 +129,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                 <li>• API development & integration</li>
               </ul>
             </div>
+            <!-- AI & ML Service Card -->
             <div class="border border-terminal-blue/30 rounded-lg p-4 hover:border-terminal-blue hover:shadow-lg hover:shadow-terminal-blue/20 transition-all duration-300">
               <h3 class="text-terminal-blue font-semibold text-lg mb-2">AI & Machine Learning</h3>
               <ul class="space-y-1 text-terminal-text">
@@ -108,6 +140,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                 <li>• Data analysis & visualization</li>
               </ul>
             </div>
+            <!-- Cloud & DevOps Service Card -->
             <div class="border border-yellow-500/30 rounded-lg p-4 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300">
               <h3 class="text-yellow-500 font-semibold text-lg mb-2">Cloud & DevOps</h3>
               <ul class="space-y-1 text-terminal-text">
@@ -118,6 +151,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                 <li>• Performance optimization</li>
               </ul>
             </div>
+            <!-- Consulting Service Card -->
             <div class="border border-purple-500/30 rounded-lg p-4 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
               <h3 class="text-purple-500 font-semibold text-lg mb-2">Consulting</h3>
               <ul class="space-y-1 text-terminal-text">
@@ -135,6 +169,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         }
       ];
 
+    /**
+     * PROJECTS COMMAND
+     * Portfolio projects showcase with detailed information
+     */
     case 'projects':
       return [
         {
@@ -147,6 +185,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         {
           id: commandId + 1,
           content: `<div class="mt-4 space-y-6">
+            <!-- AI Voice Assistant Project -->
             <div class="border border-terminal-green/30 rounded-lg p-4 hover:border-terminal-green hover:shadow-lg hover:shadow-terminal-green/20 transition-all duration-300">
               <div class="flex flex-wrap items-center justify-between mb-3">
                 <h3 class="text-terminal-green font-semibold text-lg">AI Voice Assistant Platform</h3>
@@ -169,6 +208,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
               </div>
             </div>
 
+            <!-- HealthTech Analytics Project -->
             <div class="border border-terminal-blue/30 rounded-lg p-4 hover:border-terminal-blue hover:shadow-lg hover:shadow-terminal-blue/20 transition-all duration-300">
               <div class="flex flex-wrap items-center justify-between mb-3">
                 <h3 class="text-terminal-blue font-semibold text-lg">HealthTech Analytics Dashboard</h3>
@@ -191,6 +231,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
               </div>
             </div>
 
+            <!-- Smart Trading Algorithm Project -->
             <div class="border border-yellow-500/30 rounded-lg p-4 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300">
               <div class="flex flex-wrap items-center justify-between mb-3">
                 <h3 class="text-yellow-500 font-semibold text-lg">Smart Trading Algorithm</h3>
@@ -219,6 +260,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         }
       ];
 
+    /**
+     * ACHIEVEMENTS COMMAND
+     * Certifications, job simulations, and accomplishments
+     */
     case 'achievements':
       return [
         {
@@ -232,6 +277,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           id: commandId + 1,
           content: `<div class="mt-4 space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Certifications Section -->
               <div class="space-y-3">
                 <h3 class="text-terminal-green font-semibold text-lg border-b border-terminal-green/30 pb-1">🏆 Certifications</h3>
                 <div class="space-y-2">
@@ -259,6 +305,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                 </div>
               </div>
               
+              <!-- Job Simulations Section -->
               <div class="space-y-3">
                 <h3 class="text-terminal-blue font-semibold text-lg border-b border-terminal-blue/30 pb-1">💼 Job Simulations</h3>
                 <div class="space-y-2">
@@ -287,6 +334,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
               </div>
             </div>
             
+            <!-- Hackathons & Competitions Section -->
             <div class="mt-6">
               <h3 class="text-yellow-500 font-semibold text-lg border-b border-yellow-500/30 pb-1 mb-3">🚀 Hackathons & Competitions</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -313,6 +361,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         }
       ];
 
+    /**
+     * CONTACT COMMAND
+     * Contact information and social media links
+     */
     case 'contact':
       return [
         {
@@ -328,6 +380,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
             <div class="text-terminal-text">
               <p class="mb-4">Choose your preferred communication channel:</p>
               <div class="space-y-3">
+                <!-- Email Contact -->
                 <div onclick="window.open('https://mail.google.com', '_blank')" class="flex items-center gap-3 p-3 border border-terminal-green/30 rounded hover:border-terminal-green hover:bg-terminal-green/5 transition-all cursor-pointer">
                   <span class="text-terminal-green font-mono">1.</span>
                   <span class="text-terminal-text">📧</span>
@@ -338,6 +391,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                   <span class="text-terminal-green text-sm">→</span>
                 </div>
                 
+                <!-- LinkedIn Contact -->
                 <div onclick="window.open('https://linkedin.com/login', '_blank')" class="flex items-center gap-3 p-3 border border-terminal-blue/30 rounded hover:border-terminal-blue hover:bg-terminal-blue/5 transition-all cursor-pointer">
                   <span class="text-terminal-blue font-mono">2.</span>
                   <span class="text-terminal-text">💼</span>
@@ -348,6 +402,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                   <span class="text-terminal-blue text-sm">→</span>
                 </div>
                 
+                <!-- GitHub Contact -->
                 <div onclick="window.open('https://github.com/login', '_blank')" class="flex items-center gap-3 p-3 border border-purple-500/30 rounded hover:border-purple-500 hover:bg-purple-500/5 transition-all cursor-pointer">
                   <span class="text-purple-500 font-mono">3.</span>
                   <span class="text-terminal-text">🐙</span>
@@ -358,6 +413,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                   <span class="text-purple-500 text-sm">→</span>
                 </div>
                 
+                <!-- Twitter/X Contact -->
                 <div onclick="window.open('https://twitter.com/login', '_blank')" class="flex items-center gap-3 p-3 border border-cyan-500/30 rounded hover:border-cyan-500 hover:bg-cyan-500/5 transition-all cursor-pointer">
                   <span class="text-cyan-500 font-mono">4.</span>
                   <span class="text-terminal-text">🐦</span>
@@ -369,6 +425,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                 </div>
               </div>
               
+              <!-- Call to Action -->
               <div class="mt-6 p-4 border border-terminal-green/30 rounded bg-terminal-green/5">
                 <div class="text-terminal-green text-sm font-mono">$ echo "Let's build something together."</div>
               </div>
@@ -380,6 +437,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         }
       ];
 
+    /**
+     * FUN COMMAND
+     * Overview of available games and easter eggs
+     */
     case 'fun':
       return [
         {
@@ -394,23 +455,28 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: `<div class="mt-4">
             <div class="text-terminal-text mb-4">Welcome to the fun zone! Here are some easter eggs to try:</div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- CowSay Game Card -->
               <div class="border border-terminal-green/30 rounded p-3 hover:border-terminal-green transition-all">
                 <div class="text-terminal-green font-mono">$ cowsay "Hello World!"</div>
                 <div class="text-terminal-text/60 text-sm mt-1">Classic ASCII cow says your message</div>
               </div>
+              <!-- Matrix Game Card -->
               <div class="border border-terminal-blue/30 rounded p-3 hover:border-terminal-blue transition-all">
                 <div class="text-terminal-blue font-mono">$ matrix</div>
                 <div class="text-terminal-text/60 text-sm mt-1">Enter the Matrix digital rain</div>
               </div>
+              <!-- Snake Game Card -->
               <div class="border border-yellow-500/30 rounded p-3 hover:border-yellow-500 transition-all">
                 <div class="text-yellow-500 font-mono">$ snake</div>
                 <div class="text-terminal-text/60 text-sm mt-1">Play a classic Snake game</div>
               </div>
+              <!-- Fortune Game Card -->
               <div class="border border-purple-500/30 rounded p-3 hover:border-purple-500 transition-all">
                 <div class="text-purple-500 font-mono">$ fortune</div>
                 <div class="text-terminal-text/60 text-sm mt-1">Display a random fortune</div>
               </div>
             </div>
+            <!-- Pro Tip Section -->
             <div class="mt-4 p-3 bg-terminal-green/10 border border-terminal-green/30 rounded">
               <div class="text-terminal-green font-mono">Pro tip:</div>
               <div class="text-terminal-text text-sm mt-1">Try typing <code class="bg-terminal-bg px-1 rounded">konami</code> for a special surprise! 🎮</div>
@@ -421,7 +487,12 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         }
       ];
 
-    // Game Commands
+    /**
+     * GAME COMMANDS
+     * Interactive games and activities
+     */
+    
+    // CowSay - ASCII cow with custom message
     case 'cowsay':
       const cowMessage = fullArgs || 'Hello World!';
       return {
@@ -432,6 +503,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         className: 'cowsay-container'
       };
 
+    // Matrix - Digital rain animation
     case 'matrix':
       return {
         id: commandId,
@@ -441,6 +513,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         className: 'matrix-container'
       };
 
+    // Snake - Classic Snake game
     case 'snake':
       return {
         id: commandId,
@@ -450,6 +523,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         className: 'snake-container'
       };
 
+    // Fortune - Random quote/fortune generator
     case 'fortune':
       return {
         id: commandId,
@@ -459,6 +533,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         className: 'fortune-container'
       };
 
+    // Konami - Secret easter egg
     case 'konami':
       return {
         id: commandId,
@@ -468,6 +543,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         className: 'konami-container'
       };
 
+    /**
+     * HELP COMMAND
+     * Display all available commands with descriptions
+     */
     case 'help':
       return [
         {
@@ -480,12 +559,15 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         {
           id: commandId + 1,
           content: `<div class="mt-4 space-y-2">
+            <!-- Main Commands List -->
             ${Object.entries(COMMAND_DESCRIPTIONS).map(([cmd, desc]) => 
               `<div class="flex">
                 <span class="text-terminal-green font-mono w-20">${cmd}</span>
                 <span class="text-terminal-text">- ${desc}</span>
               </div>`
             ).join('')}
+            
+            <!-- Fun Commands Section -->
             <div class="mt-4 text-terminal-text/60 text-sm">
               <p>🎮 Fun Commands:</p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
@@ -511,6 +593,8 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
                 </div>
               </div>
             </div>
+            
+            <!-- Usage Tips -->
             <div class="mt-4 text-terminal-text/60 text-sm">
               <p>💡 Tips:</p>
               <ul class="list-disc list-inside space-y-1 mt-2">
@@ -526,6 +610,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         }
       ];
 
+    /**
+     * CLEAR COMMAND
+     * Clear terminal output (handled by terminal hook)
+     */
     case 'clear':
       return {
         id: commandId,
@@ -534,6 +622,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         animate: false
       };
 
+    /**
+     * ECHO COMMAND
+     * Echo back user message
+     */
     case 'echo':
       const message = fullArgs || 'Hello World!';
       return {
@@ -544,6 +636,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         speed: 15
       };
 
+    /**
+     * DEFAULT CASE
+     * Handle unknown commands with helpful suggestions
+     */
     default:
       const suggestions = ['help', 'about', 'projects', 'fun'];
       const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];

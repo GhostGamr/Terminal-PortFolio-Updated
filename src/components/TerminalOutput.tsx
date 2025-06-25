@@ -13,23 +13,39 @@ interface TerminalOutputProps {
   output: OutputLine[];
 }
 
+/**
+ * Terminal Output Component
+ * 
+ * Renders all terminal output including:
+ * - Regular text output with animations
+ * - Interactive game components
+ * - Dynamic content rendering based on command type
+ * - Proper cleanup and React root management for games
+ */
 const TerminalOutput: React.FC<TerminalOutputProps> = ({ output }) => {
+  
+  /**
+   * Effect to render interactive game components
+   * Scans output for game command markers and renders appropriate React components
+   */
   useEffect(() => {
-    // Render game components after DOM update
+    // Process each output line for game components
     output.forEach((line) => {
+      // Render CowSay component
       if (line.content.includes('cowsay-')) {
         const match = line.content.match(/cowsay-(\d+)/);
         if (match) {
           const element = document.getElementById(`cowsay-${match[1]}`);
           if (element && !element.hasChildNodes()) {
             const root = createRoot(element);
-            // Extract message from command history or use default
-            const message = 'Hello World!'; // This would need to be passed from the command
+            // Extract message from command or use default
+            const message = 'Hello World!'; // TODO: Pass actual message from command
             root.render(<CowSay message={message} />);
           }
         }
       }
       
+      // Render Matrix Rain component
       if (line.content.includes('matrix-')) {
         const match = line.content.match(/matrix-(\d+)/);
         if (match) {
@@ -41,6 +57,7 @@ const TerminalOutput: React.FC<TerminalOutputProps> = ({ output }) => {
         }
       }
       
+      // Render Snake Game component
       if (line.content.includes('snake-')) {
         const match = line.content.match(/snake-(\d+)/);
         if (match) {
@@ -52,6 +69,7 @@ const TerminalOutput: React.FC<TerminalOutputProps> = ({ output }) => {
         }
       }
       
+      // Render Fortune component
       if (line.content.includes('fortune-')) {
         const match = line.content.match(/fortune-(\d+)/);
         if (match) {
@@ -63,6 +81,7 @@ const TerminalOutput: React.FC<TerminalOutputProps> = ({ output }) => {
         }
       }
       
+      // Render Konami Code component
       if (line.content.includes('konami-')) {
         const match = line.content.match(/konami-(\d+)/);
         if (match) {
@@ -84,11 +103,14 @@ const TerminalOutput: React.FC<TerminalOutputProps> = ({ output }) => {
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2, delay: index * 0.05 }}
-          className={`${line.type === 'error' ? 'text-red-400' : 
-                     line.type === 'success' ? 'text-terminal-green' : 
-                     line.type === 'command' ? 'text-terminal-blue' :
-                     'text-terminal-text'}`}
+          className={`${
+            line.type === 'error' ? 'text-red-400' : 
+            line.type === 'success' ? 'text-terminal-green' : 
+            line.type === 'command' ? 'text-terminal-blue' :
+            'text-terminal-text'
+          }`}
         >
+          {/* Render animated text or static content */}
           {line.animate ? (
             <TypewriterText 
               text={line.content} 

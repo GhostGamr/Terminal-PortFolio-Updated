@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Collection of inspirational quotes and programming wisdom
 const fortunes = [
   "The best time to plant a tree was 20 years ago. The second best time is now.",
   "Your future is created by what you do today, not tomorrow.",
@@ -23,16 +24,33 @@ const fortunes = [
   "The best error message is the one that never shows up. - Thomas Fuchs"
 ];
 
+/**
+ * Fortune Component
+ * 
+ * Displays a random inspirational quote or programming wisdom.
+ * Mimics the classic Unix 'fortune' command with:
+ * - Random quote selection from curated collection
+ * - Terminal-style formatting
+ * - Mix of general wisdom and programming-specific quotes
+ * - Encouragement to run again for more fortunes
+ */
 const Fortune: React.FC = () => {
+  // Select random fortune from the collection
   const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
 
   return (
     <div className="max-w-2xl mx-auto">
+      {/* Fortune display card */}
       <div className="border border-terminal-green/30 rounded-lg p-6 bg-terminal-green/5">
+        {/* Command prompt simulation */}
         <div className="text-terminal-green font-mono text-sm mb-2">$ fortune</div>
+        
+        {/* Fortune text */}
         <div className="text-terminal-text text-lg leading-relaxed italic">
           "{randomFortune}"
         </div>
+        
+        {/* Instructions for getting more fortunes */}
         <div className="mt-4 text-terminal-text/60 text-sm">
           Press any key or run 'fortune' again for another fortune...
         </div>

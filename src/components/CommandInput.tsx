@@ -11,6 +11,16 @@ interface CommandInputProps {
   setHistoryIndex: (index: number) => void;
 }
 
+/**
+ * Command Input Component
+ * 
+ * Handles all user input functionality:
+ * - Command typing and execution
+ * - Command history navigation (up/down arrows)
+ * - Auto-completion suggestions (Tab key)
+ * - Blinking cursor animation
+ * - Auto-focus for seamless typing experience
+ */
 const CommandInput: React.FC<CommandInputProps> = ({
   currentCommand,
   setCurrentCommand,
@@ -19,11 +29,16 @@ const CommandInput: React.FC<CommandInputProps> = ({
   historyIndex,
   setHistoryIndex
 }) => {
+  // Reference to input element for focus management
   const inputRef = useRef<HTMLInputElement>(null);
+  
+  // State for blinking cursor animation
   const [showCursor, setShowCursor] = useState(true);
+  
+  // State for command suggestions
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
-  // Blinking cursor effect
+  // Blinking cursor effect - toggles every 700ms
   useEffect(() => {
     const interval = setInterval(() => {
       setShowCursor(prev => !prev);
@@ -31,14 +46,14 @@ const CommandInput: React.FC<CommandInputProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  // Auto-focus input
+  // Auto-focus input element when component mounts
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
 
-  // Handle command suggestions
+  // Generate command suggestions based on current input
   useEffect(() => {
     if (currentCommand.trim()) {
       setSuggestions(getCommandSuggestions(currentCommand));
@@ -47,6 +62,12 @@ const CommandInput: React.FC<CommandInputProps> = ({
     }
   }, [currentCommand]);
 
+  /**
+   * Handle keyboard input events
+   * - Enter: Execute command
+   * - Arrow Up/Down: Navigate command history
+   * - Tab: Auto-complete with first suggestion
+   */
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -58,6 +79,7 @@ const CommandInput: React.FC<CommandInputProps> = ({
       }
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
+      // Navigate backwards through command history
       if (commandHistory.length > 0) {
         const newIndex = historyIndex === -1 ? 0 : Math.min(historyIndex + 1, commandHistory.length - 1);
         setHistoryIndex(newIndex);
@@ -65,6 +87,7 @@ const CommandInput: React.FC<CommandInputProps> = ({
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
+      // Navigate forwards through command history
       if (historyIndex > 0) {
         const newIndex = historyIndex - 1;
         setHistoryIndex(newIndex);
@@ -75,6 +98,7 @@ const CommandInput: React.FC<CommandInputProps> = ({
       }
     } else if (e.key === 'Tab') {
       e.preventDefault();
+      // Auto-complete with first suggestion
       if (suggestions.length > 0) {
         setCurrentCommand(suggestions[0]);
         setSuggestions([]);
@@ -84,6 +108,7 @@ const CommandInput: React.FC<CommandInputProps> = ({
 
   return (
     <div className="relative">
+      {/* Command suggestions dropdown */}
       {suggestions.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -99,10 +124,14 @@ const CommandInput: React.FC<CommandInputProps> = ({
         </motion.div>
       )}
       
+      {/* Command input line with prompt */}
       <div className="flex items-center gap-2 text-terminal-text">
+        {/* Terminal prompt symbols */}
         <span className="text-terminal-green">➜</span>
         <span className="text-terminal-blue">~</span>
         <span className="text-terminal-text">$</span>
+        
+        {/* Input container with custom cursor */}
         <div className="flex-1 relative">
           <input
             ref={inputRef}
@@ -115,6 +144,7 @@ const CommandInput: React.FC<CommandInputProps> = ({
             autoComplete="off"
             spellCheck={false}
           />
+          {/* Custom blinking cursor */}
           <span 
             className={`absolute top-0 left-0 pointer-events-none text-terminal-text ${
               showCursor ? 'opacity-100' : 'opacity-0'
