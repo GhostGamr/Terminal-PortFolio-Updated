@@ -12,15 +12,14 @@ interface CommandInputProps {
 }
 
 /**
- * Enhanced Command Input Component
+ * Ultra-Stable Command Input Component
  * 
- * Handles all user input functionality with improved focus management:
- * - Command typing and execution
- * - Command history navigation (up/down arrows)
- * - Auto-completion suggestions (Tab key)
- * - Enhanced blinking cursor animation
- * - Persistent auto-focus for seamless typing experience
- * - Better visual feedback and responsiveness
+ * Handles all user input with maximum stability:
+ * - Persistent focus management without interference
+ * - Stable cursor animation
+ * - Robust command history navigation
+ * - Enhanced auto-completion
+ * - Optimized performance and responsiveness
  */
 const CommandInput: React.FC<CommandInputProps> = ({
   currentCommand,
@@ -30,63 +29,73 @@ const CommandInput: React.FC<CommandInputProps> = ({
   historyIndex,
   setHistoryIndex
 }) => {
-  // Reference to input element for focus management
+  // Reference to input element for stable focus management
   const inputRef = useRef<HTMLInputElement>(null);
   
-  // State for enhanced blinking cursor animation
+  // Stable cursor blinking state
   const [showCursor, setShowCursor] = useState(true);
   
-  // State for command suggestions
+  // Command suggestions state
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   /**
-   * Enhanced blinking cursor effect
-   * More realistic timing that mimics actual terminal cursors
+   * Ultra-stable cursor blinking effect
+   * Consistent timing for smooth visual feedback
    */
   useEffect(() => {
     const interval = setInterval(() => {
       setShowCursor(prev => !prev);
-    }, 600); // Slightly faster blink for better responsiveness
+    }, 500); // Stable 500ms blink rate
     return () => clearInterval(interval);
   }, []);
 
   /**
-   * Persistent auto-focus management
-   * Ensures input stays focused even after command execution
+   * Robust focus management
+   * Ensures input stays focused without interfering with games
    */
   useEffect(() => {
     const focusInput = () => {
-      if (inputRef.current) {
-        inputRef.current.focus();
+      if (inputRef.current && document.activeElement !== inputRef.current) {
+        // Only focus if no game is currently active
+        const hasActiveGame = document.querySelector('.snake-container canvas, .matrix-container canvas');
+        if (!hasActiveGame) {
+          inputRef.current.focus();
+        }
       }
     };
 
-    // Focus on mount
+    // Initial focus
     focusInput();
 
-    // Re-focus when clicking anywhere on the terminal
-    const handleGlobalClick = () => {
-      setTimeout(focusInput, 10); // Small delay to ensure other events complete
+    // Smart re-focus on clicks (avoid interfering with games)
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as Element;
+      const isGameElement = target.closest('.snake-container, .matrix-container, .konami-container');
+      
+      if (!isGameElement) {
+        setTimeout(focusInput, 50);
+      }
     };
 
-    // Re-focus when pressing any key globally
-    const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      // Don't interfere with game controls
-      if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+    // Re-focus on relevant key presses
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't interfere with arrow keys when games are active
+      const hasActiveGame = document.querySelector('.snake-container, .matrix-container');
+      if (!hasActiveGame || !['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
         focusInput();
       }
     };
 
-    document.addEventListener('click', handleGlobalClick);
-    document.addEventListener('keydown', handleGlobalKeyDown);
+    document.addEventListener('click', handleClick);
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      document.removeEventListener('click', handleGlobalClick);
-      document.removeEventListener('keydown', handleGlobalKeyDown);
+      document.removeEventListener('click', handleClick);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
-  // Generate command suggestions based on current input
+  // Generate command suggestions efficiently
   useEffect(() => {
     if (currentCommand.trim()) {
       setSuggestions(getCommandSuggestions(currentCommand));
@@ -97,10 +106,7 @@ const CommandInput: React.FC<CommandInputProps> = ({
 
   /**
    * Enhanced keyboard input handling
-   * - Enter: Execute command with improved feedback
-   * - Arrow Up/Down: Navigate command history
-   * - Tab: Auto-complete with first suggestion
-   * - Escape: Clear current input
+   * Robust event handling with proper cleanup
    */
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
@@ -110,16 +116,16 @@ const CommandInput: React.FC<CommandInputProps> = ({
         setCurrentCommand('');
         setHistoryIndex(-1);
         setSuggestions([]);
-        // Ensure focus returns to input after command execution
+        
+        // Ensure focus returns after command execution
         setTimeout(() => {
           if (inputRef.current) {
             inputRef.current.focus();
           }
-        }, 100);
+        }, 200);
       }
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      // Navigate backwards through command history
       if (commandHistory.length > 0) {
         const newIndex = historyIndex === -1 ? 0 : Math.min(historyIndex + 1, commandHistory.length - 1);
         setHistoryIndex(newIndex);
@@ -127,7 +133,6 @@ const CommandInput: React.FC<CommandInputProps> = ({
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      // Navigate forwards through command history
       if (historyIndex > 0) {
         const newIndex = historyIndex - 1;
         setHistoryIndex(newIndex);
@@ -138,14 +143,12 @@ const CommandInput: React.FC<CommandInputProps> = ({
       }
     } else if (e.key === 'Tab') {
       e.preventDefault();
-      // Auto-complete with first suggestion
       if (suggestions.length > 0) {
         setCurrentCommand(suggestions[0]);
         setSuggestions([]);
       }
     } else if (e.key === 'Escape') {
       e.preventDefault();
-      // Clear current input
       setCurrentCommand('');
       setSuggestions([]);
       setHistoryIndex(-1);
@@ -154,42 +157,42 @@ const CommandInput: React.FC<CommandInputProps> = ({
 
   return (
     <div className="relative">
-      {/* Enhanced command suggestions dropdown */}
+      {/* Stable suggestions dropdown */}
       {suggestions.length > 0 && (
         <motion.div
-          initial={{ opacity: 0, y: 15, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 10, scale: 0.95 }}
-          transition={{ duration: 0.2 }}
-          className="absolute bottom-full mb-3 bg-terminal-window border border-terminal-border rounded-lg p-3 text-xs shadow-lg shadow-terminal-green/10"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 5 }}
+          transition={{ duration: 0.15 }}
+          className="absolute bottom-full mb-2 bg-terminal-window border border-terminal-border rounded-lg p-3 text-xs shadow-xl"
         >
           <div className="text-terminal-green font-semibold mb-2">Suggestions:</div>
           {suggestions.map((suggestion, index) => (
             <div 
               key={suggestion} 
-              className={`px-3 py-1 rounded transition-colors ${
+              className={`px-2 py-1 rounded transition-colors ${
                 index === 0 
                   ? 'text-terminal-green bg-terminal-green/10' 
-                  : 'text-terminal-text hover:bg-terminal-border/30'
+                  : 'text-terminal-text hover:bg-terminal-border/20'
               }`}
             >
               {suggestion}
             </div>
           ))}
-          <div className="text-terminal-text/60 mt-2 px-3 text-xs">
-            Press <kbd className="bg-terminal-border px-1 rounded">Tab</kbd> to complete
+          <div className="text-terminal-text/60 mt-2 px-2 text-xs">
+            Press <kbd className="bg-terminal-border px-1 rounded text-xs">Tab</kbd> to complete
           </div>
         </motion.div>
       )}
       
-      {/* Enhanced command input line with improved styling */}
+      {/* Stable command input line */}
       <div className="flex items-center gap-3 text-terminal-text">
-        {/* Enhanced terminal prompt symbols */}
+        {/* Terminal prompt */}
         <span className="text-terminal-green font-bold">➜</span>
         <span className="text-terminal-blue font-semibold">~</span>
         <span className="text-terminal-text font-bold">$</span>
         
-        {/* Input container with enhanced cursor */}
+        {/* Input with stable cursor */}
         <div className="flex-1 relative">
           <input
             ref={inputRef}
@@ -203,14 +206,14 @@ const CommandInput: React.FC<CommandInputProps> = ({
             spellCheck={false}
             autoFocus
           />
-          {/* Enhanced custom blinking cursor */}
+          {/* Ultra-stable custom cursor */}
           <span 
             className={`absolute top-0 left-0 pointer-events-none text-terminal-green font-bold ${
-              showCursor ? 'opacity-100' : 'opacity-0'
-            } transition-opacity duration-150`}
+              showCursor ? 'opacity-100' : 'opacity-20'
+            } transition-opacity duration-200`}
             style={{ 
               left: `${currentCommand.length * 0.6}em`,
-              textShadow: '0 0 5px rgba(0, 255, 153, 0.5)'
+              textShadow: '0 0 3px rgba(0, 255, 153, 0.3)'
             }}
           >
             █

@@ -2,11 +2,10 @@ import { OutputLine } from '../types/terminal';
 import { ASCII_BANNER, TAGLINE, COMMAND_DESCRIPTIONS } from './constants';
 
 /**
- * Command Executor
+ * Ultra-Fast Command Executor
  * 
- * Central command processing system that handles all terminal commands.
- * Each command returns OutputLine(s) that get displayed in the terminal.
- * All text output now uses enhanced typewriter animation for authentic feel.
+ * Optimized command processing with lightning-fast typewriter speeds.
+ * All text animations now use ultra-fast timing for immediate feedback.
  */
 export const executeTerminalCommand = (command: string): OutputLine | OutputLine[] => {
   // Parse command and arguments
@@ -35,7 +34,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: `<div class="text-center text-terminal-text text-lg font-semibold mb-6">${TAGLINE}</div>`,
           type: 'normal',
           animate: true,
-          speed: 25 // Slower for emphasis
+          speed: 5 // Ultra-fast tagline
         },
         {
           id: commandId + 2,
@@ -48,7 +47,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
             </button>
           </div>`,
           type: 'normal',
-          animate: false, // Buttons appear instantly after text
+          animate: false, // Buttons appear instantly
           className: 'mb-6'
         },
         {
@@ -58,14 +57,14 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           </div>`,
           type: 'normal',
           animate: true,
-          speed: 20,
+          speed: 3, // Ultra-fast help text
           className: 'mb-6'
         }
       ];
 
     /**
      * ABOUT COMMAND
-     * Personal information with enhanced typewriter animation
+     * Personal information with ultra-fast animation
      */
     case 'about':
       return [
@@ -74,7 +73,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: 'Gathering facts… Done. Printing biography.',
           type: 'success',
           animate: true,
-          speed: 35 // Slightly slower for dramatic effect
+          speed: 6 // Fast loading message
         },
         {
           id: commandId + 1,
@@ -98,13 +97,13 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           </div>`,
           type: 'normal',
           animate: true,
-          speed: 20 // Comfortable reading speed
+          speed: 4 // Ultra-fast content
         }
       ];
 
     /**
      * SERVICES COMMAND
-     * Professional services with typewriter animation
+     * Professional services with fast animation
      */
     case 'services':
       return [
@@ -113,7 +112,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: 'Loading service catalog...',
           type: 'success',
           animate: true,
-          speed: 40
+          speed: 8
         },
         {
           id: commandId + 1,
@@ -165,14 +164,13 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           </div>`,
           type: 'normal',
           animate: true,
-          speed: 15, // Faster for structured content
+          speed: 3, // Ultra-fast for structured content
           className: 'mb-4'
         }
       ];
 
     /**
      * PROJECTS COMMAND
-     * Portfolio projects with typewriter effect
      */
     case 'projects':
       return [
@@ -181,7 +179,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: '$ git branch --list-projects',
           type: 'success',
           animate: true,
-          speed: 30
+          speed: 5
         },
         {
           id: commandId + 1,
@@ -190,14 +188,13 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           </div>`,
           type: 'normal',
           animate: true,
-          speed: 25,
+          speed: 4,
           className: 'mb-4'
         }
       ];
 
     /**
      * ACHIEVEMENTS COMMAND
-     * Certifications and accomplishments with animation
      */
     case 'achievements':
       return [
@@ -206,7 +203,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: '$ cat achievements.log | sort -r',
           type: 'success',
           animate: true,
-          speed: 30
+          speed: 5
         },
         {
           id: commandId + 1,
@@ -215,14 +212,13 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           </div>`,
           type: 'normal',
           animate: true,
-          speed: 25,
+          speed: 4,
           className: 'mb-4'
         }
       ];
 
     /**
      * CONTACT COMMAND
-     * Contact information with enhanced typewriter effect
      */
     case 'contact':
       return [
@@ -231,7 +227,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: 'Establishing secure connections...',
           type: 'success',
           animate: true,
-          speed: 45 // Slower for dramatic effect
+          speed: 8
         },
         {
           id: commandId + 1,
@@ -292,7 +288,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           </div>`,
           type: 'normal',
           animate: true,
-          speed: 18,
+          speed: 3,
           className: 'mb-4'
         }
       ];
@@ -308,7 +304,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: 'Initializing fun protocols...',
           type: 'success',
           animate: true,
-          speed: 40
+          speed: 8
         },
         {
           id: commandId + 1,
@@ -344,7 +340,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           </div>`,
           type: 'normal',
           animate: true,
-          speed: 20
+          speed: 4
         }
       ];
 
@@ -362,7 +358,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: `Summoning ASCII cow...`,
           type: 'success',
           animate: true,
-          speed: 35
+          speed: 6
         },
         {
           id: commandId + 1,
@@ -381,7 +377,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: 'Entering the Matrix...',
           type: 'success',
           animate: true,
-          speed: 40
+          speed: 8
         },
         {
           id: commandId + 1,
@@ -400,7 +396,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: 'Loading Snake game...',
           type: 'success',
           animate: true,
-          speed: 35
+          speed: 6
         },
         {
           id: commandId + 1,
@@ -419,7 +415,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: 'Consulting the digital oracle...',
           type: 'success',
           animate: true,
-          speed: 40
+          speed: 8
         },
         {
           id: commandId + 1,
@@ -438,7 +434,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: 'Activating Konami Code detector...',
           type: 'success',
           animate: true,
-          speed: 35
+          speed: 6
         },
         {
           id: commandId + 1,
@@ -451,7 +447,6 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
 
     /**
      * HELP COMMAND
-     * Display all available commands with typewriter animation
      */
     case 'help':
       return [
@@ -460,7 +455,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           content: 'Available commands:',
           type: 'success',
           animate: true,
-          speed: 30
+          speed: 5
         },
         {
           id: commandId + 1,
@@ -513,13 +508,12 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           </div>`,
           type: 'normal',
           animate: true,
-          speed: 15 // Faster for reference material
+          speed: 2 // Ultra-fast for reference material
         }
       ];
 
     /**
      * CLEAR COMMAND
-     * Clear terminal output (handled by terminal hook)
      */
     case 'clear':
       return {
@@ -531,7 +525,6 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
 
     /**
      * ECHO COMMAND
-     * Echo back user message with typewriter effect
      */
     case 'echo':
       const message = fullArgs || 'Hello World!';
@@ -540,12 +533,11 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         content: message,
         type: 'normal',
         animate: true,
-        speed: 25
+        speed: 4
       };
 
     /**
      * DEFAULT CASE
-     * Handle unknown commands with helpful suggestions
      */
     default:
       const suggestions = ['help', 'about', 'projects', 'fun'];
@@ -556,7 +548,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         content: `command not found: ${baseCommand}\nDid you mean '${randomSuggestion}'? Type 'help' to see all available commands.`,
         type: 'error',
         animate: true,
-        speed: 30
+        speed: 5
       };
   }
 };

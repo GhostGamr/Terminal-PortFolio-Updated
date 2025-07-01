@@ -8,19 +8,19 @@ interface TypewriterTextProps {
 }
 
 /**
- * Enhanced Typewriter Text Component
+ * Ultra-Fast Stable Typewriter Text Component
  * 
- * Creates an authentic typewriter effect with:
- * - Character-by-character reveal with variable timing
- * - Blinking cursor that follows the text
- * - Realistic typing speed variations
+ * Creates a lightning-fast typewriter effect with:
+ * - Extremely fast character-by-character reveal (5-15ms per character)
+ * - Stable cursor animation without glitches
+ * - Minimal delays for maximum speed
  * - Support for HTML content
- * - Pause effects for punctuation
- * - Completion callbacks for chaining animations
+ * - Robust error handling and cleanup
+ * - Optimized performance for smooth animations
  */
 const TypewriterText: React.FC<TypewriterTextProps> = ({ 
   text, 
-  speed = 30, // Base speed in milliseconds per character
+  speed = 8, // Ultra-fast base speed (8ms per character)
   className = '',
   onComplete 
 }) => {
@@ -30,52 +30,52 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   // Current character index being processed
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // Cursor visibility state for blinking effect
+  // Cursor visibility state for stable blinking
   const [showCursor, setShowCursor] = useState(true);
   
   // Animation completion state
   const [isComplete, setIsComplete] = useState(false);
 
   /**
-   * Blinking cursor effect
-   * Creates authentic typewriter cursor that blinks every 530ms
+   * Stable cursor blinking effect
+   * Optimized timing for smooth visual feedback
    */
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setShowCursor(prev => !prev);
-    }, 530); // Slightly irregular timing for realism
+    }, 500); // Stable 500ms blink rate
 
     return () => clearInterval(cursorInterval);
   }, []);
 
   /**
-   * Calculate typing delay based on character type
-   * Adds realistic pauses for punctuation and spaces
+   * Calculate ultra-fast typing delay
+   * Minimal delays for maximum speed while maintaining readability
    */
   const getTypingDelay = (char: string): number => {
-    // Base speed with slight randomization for human-like typing
-    let delay = speed + Math.random() * 20 - 10;
+    // Ultra-fast base speed with minimal variation
+    let delay = speed + Math.random() * 3; // Only 0-3ms variation
     
-    // Longer pauses for punctuation
+    // Very short pauses for punctuation (much faster than before)
     if (char === '.' || char === '!' || char === '?') {
-      delay += 200; // Pause after sentences
+      delay += 50; // Brief pause after sentences
     } else if (char === ',' || char === ';' || char === ':') {
-      delay += 100; // Shorter pause for commas
+      delay += 25; // Minimal pause for commas
     } else if (char === ' ') {
-      delay += 30; // Slight pause for spaces
+      delay += 5; // Almost no pause for spaces
     } else if (char === '\n') {
-      delay += 150; // Pause for line breaks
+      delay += 30; // Short pause for line breaks
     }
     
-    return Math.max(delay, 10); // Minimum 10ms delay
+    return Math.max(delay, 3); // Minimum 3ms delay for stability
   };
 
   /**
-   * Main typewriter effect logic
-   * Processes one character at a time with realistic timing
+   * Ultra-fast typewriter effect logic
+   * Optimized for maximum speed and stability
    */
   useEffect(() => {
-    if (currentIndex < text.length) {
+    if (currentIndex < text.length && !isComplete) {
       const currentChar = text[currentIndex];
       const delay = getTypingDelay(currentChar);
       
@@ -85,18 +85,19 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
       }, delay);
 
       return () => clearTimeout(timer);
-    } else if (!isComplete) {
+    } else if (currentIndex >= text.length && !isComplete) {
       // Animation completed
       setIsComplete(true);
       if (onComplete) {
-        // Small delay before calling completion callback
-        setTimeout(onComplete, 100);
+        // Immediate callback for chaining
+        setTimeout(onComplete, 50);
       }
     }
   }, [currentIndex, text, speed, onComplete, isComplete]);
 
   /**
-   * Reset animation when text prop changes
+   * Robust reset when text changes
+   * Prevents glitches and ensures clean state
    */
   useEffect(() => {
     setDisplayText('');
@@ -106,32 +107,30 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   }, [text]);
 
   return (
-    <div className={`${className} relative`}>
-      {/* Main text content */}
+    <div className={`${className} relative inline-block`}>
+      {/* Main text content with stable rendering */}
       <span 
         dangerouslySetInnerHTML={{ __html: displayText }}
+        className="inline-block"
       />
       
-      {/* Animated cursor */}
+      {/* Stable animated cursor during typing */}
       {!isComplete && (
         <span 
-          className={`inline-block w-2 h-5 bg-terminal-green ml-1 ${
-            showCursor ? 'opacity-100' : 'opacity-0'
-          } transition-opacity duration-100`}
-          style={{
-            animation: 'none', // Disable CSS animation in favor of React state
-          }}
+          className={`inline-block w-2 h-5 bg-terminal-green ml-1 align-top ${
+            showCursor ? 'opacity-100' : 'opacity-20'
+          } transition-opacity duration-200`}
         >
           █
         </span>
       )}
       
-      {/* Final cursor that appears after completion */}
+      {/* Subtle final cursor after completion */}
       {isComplete && (
         <span 
-          className={`inline-block w-2 h-5 bg-terminal-green/60 ml-1 ${
-            showCursor ? 'opacity-100' : 'opacity-0'
-          } transition-opacity duration-100`}
+          className={`inline-block w-2 h-5 bg-terminal-green/40 ml-1 align-top ${
+            showCursor ? 'opacity-60' : 'opacity-10'
+          } transition-opacity duration-300`}
         >
           █
         </span>
