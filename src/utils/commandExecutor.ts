@@ -6,17 +6,7 @@ import { ASCII_BANNER, TAGLINE, COMMAND_DESCRIPTIONS } from './constants';
  * 
  * Central command processing system that handles all terminal commands.
  * Each command returns OutputLine(s) that get displayed in the terminal.
- * 
- * Supported commands:
- * - banner: Display ASCII art banner
- * - about: Personal information
- * - services: Professional services
- * - projects: Portfolio showcase
- * - achievements: Certifications and accomplishments
- * - contact: Contact information
- * - fun: Games and easter eggs overview
- * - Game commands: cowsay, matrix, snake, fortune, konami
- * - Utility commands: help, clear, echo
+ * All text output now uses enhanced typewriter animation for authentic feel.
  */
 export const executeTerminalCommand = (command: string): OutputLine | OutputLine[] => {
   // Parse command and arguments
@@ -37,15 +27,15 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           id: commandId,
           content: `<pre class="text-terminal-green font-bold text-xs md:text-sm glitch" data-text="${ASCII_BANNER}">${ASCII_BANNER}</pre>`,
           type: 'success',
-          animate: false,
+          animate: false, // ASCII art displays instantly for impact
           className: 'mb-4'
         },
         {
           id: commandId + 1,
           content: `<div class="text-center text-terminal-text text-lg font-semibold mb-6">${TAGLINE}</div>`,
           type: 'normal',
-          animate: false,
-          speed: 15
+          animate: true,
+          speed: 25 // Slower for emphasis
         },
         {
           id: commandId + 2,
@@ -58,7 +48,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
             </button>
           </div>`,
           type: 'normal',
-          animate: false,
+          animate: false, // Buttons appear instantly after text
           className: 'mb-6'
         },
         {
@@ -67,23 +57,24 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
             Type <span class="text-terminal-green">help</span> to see available commands.
           </div>`,
           type: 'normal',
-          animate: false,
+          animate: true,
+          speed: 20,
           className: 'mb-6'
         }
       ];
 
     /**
      * ABOUT COMMAND
-     * Personal information, interests, and background
+     * Personal information with enhanced typewriter animation
      */
     case 'about':
       return [
         {
           id: commandId,
-          content: '<span class="text-terminal-green">Gathering facts… Done. Printing biography.</span>',
+          content: 'Gathering facts… Done. Printing biography.',
           type: 'success',
           animate: true,
-          speed: 20
+          speed: 35 // Slightly slower for dramatic effect
         },
         {
           id: commandId + 1,
@@ -107,22 +98,22 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
           </div>`,
           type: 'normal',
           animate: true,
-          speed: 15
+          speed: 20 // Comfortable reading speed
         }
       ];
 
     /**
      * SERVICES COMMAND
-     * Professional services and expertise areas
+     * Professional services with typewriter animation
      */
     case 'services':
       return [
         {
           id: commandId,
-          content: '<span class="text-terminal-green">Loading service catalog...</span>',
+          content: 'Loading service catalog...',
           type: 'success',
           animate: true,
-          speed: 25
+          speed: 40
         },
         {
           id: commandId + 1,
@@ -173,221 +164,74 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
             </div>
           </div>`,
           type: 'normal',
-          animate: false,
+          animate: true,
+          speed: 15, // Faster for structured content
           className: 'mb-4'
         }
       ];
 
     /**
      * PROJECTS COMMAND
-     * Portfolio projects showcase with detailed information
+     * Portfolio projects with typewriter effect
      */
     case 'projects':
       return [
         {
           id: commandId,
-          content: '<span class="text-terminal-green">$ git branch --list-projects</span>',
+          content: '$ git branch --list-projects',
           type: 'success',
           animate: true,
-          speed: 20
+          speed: 30
         },
         {
           id: commandId + 1,
           content: `<div class="text-terminal-text mt-4">
-            <p>Projects are coming soon:</p>
+            <p>Projects are coming soon...</p>
           </div>`,
-          // content: `<div class="mt-4 space-y-6">
-          //   <!-- AI Voice Assistant Project -->
-          //   <div class="border border-terminal-green/30 rounded-lg p-4 hover:border-terminal-green hover:shadow-lg hover:shadow-terminal-green/20 transition-all duration-300">
-          //     <div class="flex flex-wrap items-center justify-between mb-3">
-          //       <h3 class="text-terminal-green font-semibold text-lg">AI Voice Assistant Platform</h3>
-          //       <span class="text-xs bg-terminal-green/20 text-terminal-green px-2 py-1 rounded">VoiceTech</span>
-          //     </div>
-          //     <p class="text-terminal-text mb-3">
-          //       Built a comprehensive voice assistant platform with real-time speech recognition, 
-          //       natural language understanding, and multi-language support. Handles 10k+ daily interactions.
-          //     </p>
-          //     <div class="flex flex-wrap gap-2 mb-3">
-          //       <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Python</span>
-          //       <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">FastAPI</span>
-          //       <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">React</span>
-          //       <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">TensorFlow</span>
-          //       <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">WebRTC</span>
-          //     </div>
-          //     <div class="flex gap-3">
-          //       <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
-          //       <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Live Demo →</a>
-          //     </div>
-          //   </div>
-
-          //   <!-- HealthTech Analytics Project -->
-          //   <div class="border border-terminal-blue/30 rounded-lg p-4 hover:border-terminal-blue hover:shadow-lg hover:shadow-terminal-blue/20 transition-all duration-300">
-          //     <div class="flex flex-wrap items-center justify-between mb-3">
-          //       <h3 class="text-terminal-blue font-semibold text-lg">HealthTech Analytics Dashboard</h3>
-          //       <span class="text-xs bg-terminal-blue/20 text-terminal-blue px-2 py-1 rounded">HealthTech</span>
-          //     </div>
-          //     <p class="text-terminal-text mb-3">
-          //       Developed a real-time healthcare analytics platform that processes patient data, 
-          //       generates insights, and provides predictive analytics for better patient outcomes.
-          //     </p>
-          //     <div class="flex flex-wrap gap-2 mb-3">
-          //       <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">TypeScript</span>
-          //       <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Next.js</span>
-          //       <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">D3.js</span>
-          //       <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">PostgreSQL</span>
-          //       <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">Docker</span>
-          //     </div>
-          //     <div class="flex gap-3">
-          //       <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
-          //       <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Case Study →</a>
-          //     </div>
-          //   </div>
-
-          //   <!-- Smart Trading Algorithm Project -->
-          //   <div class="border border-yellow-500/30 rounded-lg p-4 hover:border-yellow-500 hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300">
-          //     <div class="flex flex-wrap items-center justify-between mb-3">
-          //       <h3 class="text-yellow-500 font-semibold text-lg">Smart Trading Algorithm</h3>
-          //       <span class="text-xs bg-yellow-500/20 text-yellow-500 px-2 py-1 rounded">AI</span>
-          //     </div>
-          //     <p class="text-terminal-text mb-3">
-          //       Created an intelligent trading system using machine learning to analyze market patterns 
-          //       and execute trades. Achieved 23% better performance than traditional strategies.
-          //     </p>
-          //     <div class="flex flex-wrap gap-2 mb-3">
-          //       <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Python</span>
-          //       <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Pandas</span>
-          //       <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">Scikit-learn</span>
-          //       <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Redis</span>
-          //       <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">AWS</span>
-          //     </div>
-          //     <div class="flex gap-3">
-          //       <a href="#" class="text-terminal-green hover:text-terminal-green/80 underline">GitHub →</a>
-          //       <a href="#" class="text-terminal-blue hover:text-terminal-blue/80 underline">Research Paper →</a>
-          //     </div>
-          //   </div>
-          // </div>`,
           type: 'normal',
-          animate: false,
+          animate: true,
+          speed: 25,
           className: 'mb-4'
         }
       ];
 
     /**
      * ACHIEVEMENTS COMMAND
-     * Certifications, job simulations, and accomplishments
+     * Certifications and accomplishments with animation
      */
     case 'achievements':
       return [
         {
           id: commandId,
-          content: '<span class="text-terminal-green">$ cat achievements.log | sort -r</span>',
+          content: '$ cat achievements.log | sort -r',
           type: 'success',
           animate: true,
-          speed: 20
+          speed: 30
         },
         {
           id: commandId + 1,
           content: `<div class="text-terminal-text mt-4">
-            <p>Achievements are loading:</p>
-            </div>`,
-          // content: `<div class="mt-4 space-y-4">
-          //   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          //     <!-- Certifications Section -->
-          //     <div class="space-y-3">
-          //       <h3 class="text-terminal-green font-semibold text-lg border-b border-terminal-green/30 pb-1">🏆 Certifications</h3>
-          //       <div class="space-y-2">
-          //         <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
-          //           <span class="text-terminal-green">✓</span>
-          //           <div>
-          //             <div class="text-terminal-text font-medium">AWS Solutions Architect</div>
-          //             <div class="text-terminal-text/60 text-sm">Amazon Web Services • 2024</div>
-          //           </div>
-          //         </div>
-          //         <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
-          //           <span class="text-terminal-green">✓</span>
-          //           <div>
-          //             <div class="text-terminal-text font-medium">Machine Learning Specialization</div>
-          //             <div class="text-terminal-text/60 text-sm">DeepLearning.AI • 2023</div>
-          //           </div>
-          //         </div>
-          //         <div class="flex items-center gap-3 p-2 border border-terminal-green/20 rounded">
-          //           <span class="text-terminal-green">✓</span>
-          //           <div>
-          //             <div class="text-terminal-text font-medium">Azure Developer Associate</div>
-          //             <div class="text-terminal-text/60 text-sm">Microsoft • 2023</div>
-          //           </div>
-          //         </div>
-          //       </div>
-          //     </div>
-              
-          //     <!-- Job Simulations Section -->
-          //     <div class="space-y-3">
-          //       <h3 class="text-terminal-blue font-semibold text-lg border-b border-terminal-blue/30 pb-1">💼 Job Simulations</h3>
-          //       <div class="space-y-2">
-          //         <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
-          //           <span class="text-terminal-blue">●</span>
-          //           <div>
-          //             <div class="text-terminal-text font-medium">Software Engineering Virtual Experience</div>
-          //             <div class="text-terminal-text/60 text-sm">J.P. Morgan Chase & Co. • 2024</div>
-          //           </div>
-          //         </div>
-          //         <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
-          //           <span class="text-terminal-blue">●</span>
-          //           <div>
-          //             <div class="text-terminal-text font-medium">Backend Engineering Program</div>
-          //             <div class="text-terminal-text/60 text-sm">Skyscanner • 2024</div>
-          //           </div>
-          //         </div>
-          //         <div class="flex items-center gap-3 p-2 border border-terminal-blue/20 rounded">
-          //           <span class="text-terminal-blue">●</span>
-          //           <div>
-          //             <div class="text-terminal-text font-medium">Data Science Virtual Internship</div>
-          //             <div class="text-terminal-text/60 text-sm">Accenture • 2023</div>
-          //           </div>
-          //         </div>
-          //       </div>
-          //     </div>
-          //   </div>
-            
-          //   <!-- Hackathons & Competitions Section -->
-          //   <div class="mt-6">
-          //     <h3 class="text-yellow-500 font-semibold text-lg border-b border-yellow-500/30 pb-1 mb-3">🚀 Hackathons & Competitions</h3>
-          //     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          //       <div class="flex items-center gap-3 p-2 border border-yellow-500/20 rounded">
-          //         <span class="text-yellow-500">🥇</span>
-          //         <div>
-          //           <div class="text-terminal-text font-medium">1st Place - AI Healthcare Hackathon</div>
-          //           <div class="text-terminal-text/60 text-sm">TechCrunch Disrupt • 2024</div>
-          //         </div>
-          //       </div>
-          //       <div class="flex items-center gap-3 p-2 border border-yellow-500/20 rounded">
-          //         <span class="text-yellow-500">🥈</span>
-          //         <div>
-          //           <div class="text-terminal-text font-medium">2nd Place - FinTech Innovation Challenge</div>
-          //           <div class="text-terminal-text/60 text-sm">MIT • 2023</div>
-          //         </div>
-          //       </div>
-          //     </div>
-          //   </div>
-          // </div>`,
+            <p>Achievements are loading...</p>
+          </div>`,
           type: 'normal',
-          animate: false,
+          animate: true,
+          speed: 25,
           className: 'mb-4'
         }
       ];
 
     /**
      * CONTACT COMMAND
-     * Contact information and social media links
+     * Contact information with enhanced typewriter effect
      */
     case 'contact':
       return [
         {
           id: commandId,
-          content: '<span class="text-terminal-green">Establishing secure connections...</span>',
+          content: 'Establishing secure connections...',
           type: 'success',
           animate: true,
-          speed: 25
+          speed: 45 // Slower for dramatic effect
         },
         {
           id: commandId + 1,
@@ -447,46 +291,47 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
             </div>
           </div>`,
           type: 'normal',
-          animate: false,
+          animate: true,
+          speed: 18,
           className: 'mb-4'
         }
       ];
 
     /**
      * FUN COMMAND
-     * Overview of available games and easter eggs
+     * Interactive games overview with clickable buttons
      */
     case 'fun':
       return [
         {
           id: commandId,
-          content: '<span class="text-terminal-green">Initializing fun protocols...</span>',
+          content: 'Initializing fun protocols...',
           type: 'success',
           animate: true,
-          speed: 25
+          speed: 40
         },
         {
           id: commandId + 1,
           content: `<div class="mt-4">
-            <div class="text-terminal-text mb-4">Welcome to the fun zone! Here are some easter eggs to try:</div>
+            <div class="text-terminal-text mb-4">Welcome to the fun zone! Click any game to play:</div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- CowSay Game Card -->
-              <div class="border border-terminal-green/30 rounded p-3 hover:border-terminal-green transition-all">
+              <div onclick="document.querySelector('input').value='cowsay Hello World!'; document.querySelector('input').dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', bubbles: true}));" class="border border-terminal-green/30 rounded p-3 hover:border-terminal-green transition-all cursor-pointer hover:bg-terminal-green/5">
                 <div class="text-terminal-green font-mono">$ cowsay "Hello World!"</div>
                 <div class="text-terminal-text/60 text-sm mt-1">Classic ASCII cow says your message</div>
               </div>
               <!-- Matrix Game Card -->
-              <div class="border border-terminal-blue/30 rounded p-3 hover:border-terminal-blue transition-all">
+              <div onclick="document.querySelector('input').value='matrix'; document.querySelector('input').dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', bubbles: true}));" class="border border-terminal-blue/30 rounded p-3 hover:border-terminal-blue transition-all cursor-pointer hover:bg-terminal-blue/5">
                 <div class="text-terminal-blue font-mono">$ matrix</div>
                 <div class="text-terminal-text/60 text-sm mt-1">Enter the Matrix digital rain</div>
               </div>
               <!-- Snake Game Card -->
-              <div class="border border-yellow-500/30 rounded p-3 hover:border-yellow-500 transition-all">
+              <div onclick="document.querySelector('input').value='snake'; document.querySelector('input').dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', bubbles: true}));" class="border border-yellow-500/30 rounded p-3 hover:border-yellow-500 transition-all cursor-pointer hover:bg-yellow-500/5">
                 <div class="text-yellow-500 font-mono">$ snake</div>
                 <div class="text-terminal-text/60 text-sm mt-1">Play a classic Snake game</div>
               </div>
               <!-- Fortune Game Card -->
-              <div class="border border-purple-500/30 rounded p-3 hover:border-purple-500 transition-all">
+              <div onclick="document.querySelector('input').value='fortune'; document.querySelector('input').dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', bubbles: true}));" class="border border-purple-500/30 rounded p-3 hover:border-purple-500 transition-all cursor-pointer hover:bg-purple-500/5">
                 <div class="text-purple-500 font-mono">$ fortune</div>
                 <div class="text-terminal-text/60 text-sm mt-1">Display a random fortune</div>
               </div>
@@ -498,7 +343,8 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
             </div>
           </div>`,
           type: 'normal',
-          animate: false
+          animate: true,
+          speed: 20
         }
       ];
 
@@ -510,66 +356,111 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
     // CowSay - ASCII cow with custom message
     case 'cowsay':
       const cowMessage = fullArgs || 'Hello World!';
-      return {
-        id: commandId,
-        content: `<div id="cowsay-${commandId}"></div>`,
-        type: 'normal',
-        animate: false,
-        className: 'cowsay-container'
-      };
+      return [
+        {
+          id: commandId,
+          content: `Summoning ASCII cow...`,
+          type: 'success',
+          animate: true,
+          speed: 35
+        },
+        {
+          id: commandId + 1,
+          content: `<div id="cowsay-${commandId}" data-message="${cowMessage}"></div>`,
+          type: 'normal',
+          animate: false,
+          className: 'cowsay-container mt-4'
+        }
+      ];
 
     // Matrix - Digital rain animation
     case 'matrix':
-      return {
-        id: commandId,
-        content: `<div id="matrix-${commandId}"></div>`,
-        type: 'normal',
-        animate: false,
-        className: 'matrix-container'
-      };
+      return [
+        {
+          id: commandId,
+          content: 'Entering the Matrix...',
+          type: 'success',
+          animate: true,
+          speed: 40
+        },
+        {
+          id: commandId + 1,
+          content: `<div id="matrix-${commandId}"></div>`,
+          type: 'normal',
+          animate: false,
+          className: 'matrix-container mt-4'
+        }
+      ];
 
     // Snake - Classic Snake game
     case 'snake':
-      return {
-        id: commandId,
-        content: `<div id="snake-${commandId}"></div>`,
-        type: 'normal',
-        animate: false,
-        className: 'snake-container'
-      };
+      return [
+        {
+          id: commandId,
+          content: 'Loading Snake game...',
+          type: 'success',
+          animate: true,
+          speed: 35
+        },
+        {
+          id: commandId + 1,
+          content: `<div id="snake-${commandId}"></div>`,
+          type: 'normal',
+          animate: false,
+          className: 'snake-container mt-4'
+        }
+      ];
 
     // Fortune - Random quote/fortune generator
     case 'fortune':
-      return {
-        id: commandId,
-        content: `<div id="fortune-${commandId}"></div>`,
-        type: 'normal',
-        animate: false,
-        className: 'fortune-container'
-      };
+      return [
+        {
+          id: commandId,
+          content: 'Consulting the digital oracle...',
+          type: 'success',
+          animate: true,
+          speed: 40
+        },
+        {
+          id: commandId + 1,
+          content: `<div id="fortune-${commandId}"></div>`,
+          type: 'normal',
+          animate: false,
+          className: 'fortune-container mt-4'
+        }
+      ];
 
     // Konami - Secret easter egg
     case 'konami':
-      return {
-        id: commandId,
-        content: `<div id="konami-${commandId}"></div>`,
-        type: 'normal',
-        animate: false,
-        className: 'konami-container'
-      };
+      return [
+        {
+          id: commandId,
+          content: 'Activating Konami Code detector...',
+          type: 'success',
+          animate: true,
+          speed: 35
+        },
+        {
+          id: commandId + 1,
+          content: `<div id="konami-${commandId}"></div>`,
+          type: 'normal',
+          animate: false,
+          className: 'konami-container mt-4'
+        }
+      ];
 
     /**
      * HELP COMMAND
-     * Display all available commands with descriptions
+     * Display all available commands with typewriter animation
      */
     case 'help':
       return [
         {
           id: commandId,
-          content: '<span class="text-terminal-green">Available commands:</span>',
+          content: 'Available commands:',
           type: 'success',
           animate: true,
-          speed: 20
+          speed: 30
         },
         {
           id: commandId + 1,
@@ -621,7 +512,8 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
             </div>
           </div>`,
           type: 'normal',
-          animate: false
+          animate: true,
+          speed: 15 // Faster for reference material
         }
       ];
 
@@ -639,7 +531,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
 
     /**
      * ECHO COMMAND
-     * Echo back user message
+     * Echo back user message with typewriter effect
      */
     case 'echo':
       const message = fullArgs || 'Hello World!';
@@ -648,7 +540,7 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
         content: message,
         type: 'normal',
         animate: true,
-        speed: 15
+        speed: 25
       };
 
     /**
@@ -661,11 +553,10 @@ export const executeTerminalCommand = (command: string): OutputLine | OutputLine
       
       return {
         id: commandId,
-        content: `<span class="text-red-400">command not found: ${baseCommand}</span><br>
-                 <span class="text-terminal-text/60">Did you mean '<span class="text-terminal-green">${randomSuggestion}</span>'? Type '<span class="text-terminal-green">help</span>' to see all available commands.</span>`,
+        content: `command not found: ${baseCommand}\nDid you mean '${randomSuggestion}'? Type 'help' to see all available commands.`,
         type: 'error',
         animate: true,
-        speed: 25
+        speed: 30
       };
   }
 };

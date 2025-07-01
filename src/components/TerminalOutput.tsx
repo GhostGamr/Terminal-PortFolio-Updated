@@ -16,30 +16,32 @@ interface TerminalOutputProps {
 /**
  * Terminal Output Component
  * 
- * Renders all terminal output including:
- * - Regular text output with animations
- * - Interactive game components
+ * Renders all terminal output with enhanced typewriter animations:
+ * - Regular text output with realistic typing effects
+ * - Interactive game components with proper message passing
  * - Dynamic content rendering based on command type
  * - Proper cleanup and React root management for games
+ * - Enhanced visual feedback and animations
  */
 const TerminalOutput: React.FC<TerminalOutputProps> = ({ output }) => {
   
   /**
    * Effect to render interactive game components
    * Scans output for game command markers and renders appropriate React components
+   * Now includes proper message extraction for CowSay
    */
   useEffect(() => {
     // Process each output line for game components
     output.forEach((line) => {
-      // Render CowSay component
+      // Render CowSay component with custom message
       if (line.content.includes('cowsay-')) {
         const match = line.content.match(/cowsay-(\d+)/);
         if (match) {
           const element = document.getElementById(`cowsay-${match[1]}`);
           if (element && !element.hasChildNodes()) {
             const root = createRoot(element);
-            // Extract message from command or use default
-            const message = 'Hello World!'; // TODO: Pass actual message from command
+            // Extract message from data attribute or use default
+            const message = element.getAttribute('data-message') || 'Hello World!';
             root.render(<CowSay message={message} />);
           }
         }
@@ -96,13 +98,13 @@ const TerminalOutput: React.FC<TerminalOutputProps> = ({ output }) => {
   }, [output]);
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       {output.map((line, index) => (
         <motion.div
           key={`${line.id}-${index}`}
-          initial={{ opacity: 0, y: 5 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2, delay: index * 0.05 }}
+          transition={{ duration: 0.3, delay: index * 0.1 }}
           className={`${
             line.type === 'error' ? 'text-red-400' : 
             line.type === 'success' ? 'text-terminal-green' : 
@@ -110,11 +112,11 @@ const TerminalOutput: React.FC<TerminalOutputProps> = ({ output }) => {
             'text-terminal-text'
           }`}
         >
-          {/* Render animated text or static content */}
+          {/* Render with enhanced typewriter animation or static content */}
           {line.animate ? (
             <TypewriterText 
               text={line.content} 
-              speed={line.speed || 50}
+              speed={line.speed || 25}
               className={line.className || ''}
             />
           ) : (
