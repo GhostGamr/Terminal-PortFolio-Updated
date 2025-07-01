@@ -174,7 +174,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🔗 Connect With Me
 
-- **Portfolio**: [Live Demo](https://your-portfolio-url.com)
+- **Portfolio**: [Live Demo](https://ghostgamr.netlify.app/)
 - **GitHub**: [@GhostGamr](https://github.com/GhostGamr)
 - **LinkedIn**: [Harshit Raj Mishra](https://www.linkedin.com/in/harshit-raj-mishra-641111306/)
 
